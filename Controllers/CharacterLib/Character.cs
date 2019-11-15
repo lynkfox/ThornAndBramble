@@ -5,33 +5,43 @@ namespace CharacterLib
     public class Character
     {
         //Character Stats
-        public int Health { get; set; }
+        public int Level { get; set; }
+        public int HealthCurrent { get; set; }
 
 
-        public Character()
+
+        public Character() : this(1)
         {
-            this.Health = 100;
+            
+        }
+        public Character(int startingLevel)
+        {
+            this.HealthCurrent = 100;
+            this.Level = startingLevel;
+            this.IncreaseLevel(startingLevel-1);
+            
         }
 
 
         public void TakeDamage(int damage)
         {
-            this.Health -= damage;
+            this.HealthCurrent -= damage;
 
-            if(this.Health <0)
+            if(this.HealthCurrent <0)
             {
-                this.Health = 0;
+                this.HealthCurrent = 0;
             }
         }
 
         public void HealDamage(int heal)
         {
-            this.Health += heal;
+            this.HealthCurrent += heal;
         }
 
         public void IncreaseLevel(int increaseLevelBy)
         {
-            this.Health = 110;
+            double increaseMaxHealth = .1 * increaseLevelBy * this.HealthCurrent;
+            this.HealthCurrent += (int)increaseMaxHealth;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace CharacterLibTests
             int damage = 1;
             npc.TakeDamage(damage);
 
-            Assert.AreEqual(expectedHealth, npc.Health);
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
 
         [TestMethod]
@@ -26,9 +26,9 @@ namespace CharacterLibTests
 
             npc.TakeDamage(damage);
 
-            Assert.AreEqual(expectedHealth, npc.Health);
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
-        
+
         [TestMethod]
         public void HealDamageCanAddHealth()
         {
@@ -37,7 +37,7 @@ namespace CharacterLibTests
             npc.TakeDamage(10);
             npc.HealDamage(10);
 
-            Assert.AreEqual(expectedHealth, npc.Health);
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
 
         [TestMethod]
@@ -47,8 +47,17 @@ namespace CharacterLibTests
             int expectedHealth = 110;
             npc.IncreaseLevel(1);
 
-            Assert.AreEqual(expectedHealth, npc.Health);
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
 
+        }
+
+        [TestMethod]
+        public void NewCharacterWithLevelHasAppropriateHealth()
+        {
+            var npc = new Character(5);
+            int expectedHealth = 140;
+
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
     }
 }
