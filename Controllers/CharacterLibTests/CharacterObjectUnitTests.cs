@@ -16,5 +16,17 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedHealth, npc.Health);
         }
+
+        [TestMethod]
+        public void TakeDamageWillNotReduceHealthBelowZero()
+        {
+            var npc = new Character();
+            int expectedHealth = 0;
+            int damage = 110;
+
+            npc.TakeDamage(damage);
+
+            Assert.AreEqual(expectedHealth, npc.Health);
+        }
     }
 }
