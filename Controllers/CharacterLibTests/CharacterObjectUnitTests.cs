@@ -39,5 +39,16 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedHealth, npc.Health);
         }
+
+        [TestMethod]
+        public void HealthGrowsWithLevelDefaultTo10PercentPerLevel()
+        {
+            var npc = new Character();
+            int expectedHealth = 110;
+            npc.IncreaseLevel(1);
+
+            Assert.AreEqual(expectedHealth, npc.Health);
+
+        }
     }
 }

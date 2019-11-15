@@ -28,5 +28,10 @@ namespace CharacterLib
         {
             this.Health += heal;
         }
+
+        public void IncreaseLevel(int increaseLevelBy)
+        {
+            this.Health = 110;
+        }
     }
 }
