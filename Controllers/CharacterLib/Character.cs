@@ -24,5 +24,9 @@ namespace CharacterLib
             }
         }
 
+        public void HealDamage(int heal)
+        {
+            this.Health += heal;
+        }
     }
 }

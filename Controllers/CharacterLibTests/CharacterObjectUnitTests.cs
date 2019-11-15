@@ -28,5 +28,16 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedHealth, npc.Health);
         }
+        
+        [TestMethod]
+        public void HealDamageCanAddHealth()
+        {
+            var npc = new Character();
+            int expectedHealth = 100;
+            npc.TakeDamage(10);
+            npc.HealDamage(10);
+
+            Assert.AreEqual(expectedHealth, npc.Health);
+        }
     }
 }
