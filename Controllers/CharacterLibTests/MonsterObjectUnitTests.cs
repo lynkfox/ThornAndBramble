@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CharacterLibTests
 {
     [TestClass]
-    public class CharacterObjectUnitTests
+    public class MonsterObjectUnitTests
     {
         [TestMethod]
         public void TakeDamageReducesHealthByAmount()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             int expectedHealth = 99;
             int damage = 1;
             npc.TakeDamage(damage);
@@ -20,7 +20,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void TakeDamageWillNotReduceHealthBelowZero()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             int expectedHealth = 0;
             int damage = 110;
 
@@ -32,7 +32,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void HealDamageCanAddHealth()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             int expectedHealth = 100;
             npc.TakeDamage(10);
             npc.HealDamage(10);
@@ -43,7 +43,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void HealthGrowsWithLevelDefaultTo10PercentPerLevel()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             int expectedHealth = 110;
             npc.IncreaseLevel(1);
 
@@ -54,7 +54,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void NewCharacterWithLevelHasAppropriateHealth()
         {
-            var npc = new Character(5);
+            var npc = new MonsterCharacter(5);
             int expectedHealth = 140;
 
             Assert.AreEqual(expectedHealth, npc.HealthCurrent);
@@ -63,7 +63,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void HealDamageDoesNotIncreaseAboveMaxHealth()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             int expectedHealth = 100;
 
             npc.HealDamage(10);
@@ -74,7 +74,7 @@ namespace CharacterLibTests
         [TestMethod]
         public void IncreaseLevelIncreasesCombatStats()
         {
-            var npc = new Character();
+            var npc = new MonsterCharacter();
             double expectedCritChance = .16;
             double expectedCritMultiplier = 1.6;
             double expectedAttackPower = 15;

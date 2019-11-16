@@ -2,7 +2,7 @@
 
 namespace CharacterLib
 {
-    public class Character
+    public class MonsterCharacter
     {
         //Character Stats
         public int Level { get; set; }
@@ -40,12 +40,12 @@ namespace CharacterLib
         private const double DODGEperLEVEL = .05;
         private const int INITperLEVEL = 2;
 
-        public Character() : this(1)
+        public MonsterCharacter() : this(1)
         {
             
         }
 
-        public Character(int startingLevel)
+        public MonsterCharacter(int startingLevel)
         {
             this.HealthCurrent = STARTINGhealth;
             this.HealthMax = STARTINGhealth;
