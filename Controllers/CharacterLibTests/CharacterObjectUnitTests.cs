@@ -59,5 +59,16 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
+
+        [TestMethod]
+        public void HealDamageDoesNotIncreaseAboveMaxHealth()
+        {
+            var npc = new Character();
+            int expectedHealth = 100;
+
+            npc.HealDamage(10);
+
+            Assert.AreEqual(expectedHealth, npc.HealthCurrent);
+        }
     }
 }
