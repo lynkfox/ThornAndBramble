@@ -24,6 +24,7 @@ namespace CharacterLib
         //Starting Constants
         
         private const int STARTINGhealth = 100;
+        private const int STARTINGenergy = 50;
         private const double ATKPWR = 10;
         private const double CRITCHANCE = .15;
         private const double CRITMTPL = 1.5;
@@ -49,6 +50,10 @@ namespace CharacterLib
         {
             this.HealthCurrent = STARTINGhealth;
             this.HealthMax = STARTINGhealth;
+
+            this.EnergyMax = STARTINGenergy;
+            this.EnergyCurrent = STARTINGenergy;
+
             this.AttackPower = ATKPWR;
             this.DodgeChance = DODGECHANCE;
             this.CritChance = CRITCHANCE;
@@ -80,6 +85,26 @@ namespace CharacterLib
             }
         }
 
+
+        public void SpendEnergy(int energySpent)
+        {
+            this.EnergyCurrent -= energySpent;
+            if(this.EnergyCurrent < 0)
+            {
+                this.EnergyCurrent = 0;
+            }
+        }
+        public void RestoreEnergy(int energyReturned)
+        {
+            this.EnergyCurrent += energyReturned;
+            if(this.EnergyCurrent > EnergyMax)
+            {
+                this.EnergyCurrent = EnergyMax;
+            }
+        }
+
+
+
         public void IncreaseLevel(int increaseLevelBy)
         {
             AdjustHealthLevels(increaseLevelBy);
@@ -95,11 +120,15 @@ namespace CharacterLib
             this.Initiative += INITperLEVEL * increaseLevelBy;
         }
 
+        
+
         private void AdjustHealthLevels(int increaseLevelBy)
         {
             double increaseMaxHealth = HEALTHgainPERlevel * increaseLevelBy * this.HealthCurrent;
             this.HealthMax += (int)increaseMaxHealth;
             this.HealthCurrent = this.HealthMax;
         }
+
+        
     }
 }

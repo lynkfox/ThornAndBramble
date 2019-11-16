@@ -90,5 +90,39 @@ namespace CharacterLibTests
             Assert.AreEqual(expectedInit, npc.Initiative);
 
         }
+
+        [TestMethod]
+        public void SpendEnergyReducesCurrentEnergyTotal()
+        {
+            var npc = new MonsterCharacter();
+            int expectedEnergy = 40;
+
+            npc.SpendEnergy(10);
+
+            Assert.AreEqual(expectedEnergy, npc.EnergyCurrent);
+        }
+
+        [TestMethod]
+        public void SpendEnergyDoesNotReduceBelowZero()
+        {
+            var npc = new MonsterCharacter();
+            int expectedEnergy = 0;
+
+            npc.SpendEnergy(70);
+
+            Assert.AreEqual(expectedEnergy, npc.EnergyCurrent);
+
+        }
+
+        [TestMethod]
+        public void RestoreEnergyDoesNotGoAboveMaxEnergy()
+        {
+            var npc = new MonsterCharacter();
+            int expectedEnergy = 50;
+
+            npc.RestoreEnergy(10);
+
+            Assert.AreEqual(expectedEnergy, npc.EnergyCurrent);
+        }
     }
 }
