@@ -38,5 +38,30 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedMoney, player.Money);
         }
+
+        [TestMethod]
+        public void PlayerCanEarnMoney()
+        {
+            var player = new PlayerCharacter();
+            int expectedMoney = 5;
+
+            player.EarnMoney(5);
+
+            Assert.AreEqual(expectedMoney, player.Money);
+        }
+
+        [TestMethod]
+        public void PlayerCanInvestMoneyFromTotalMoney()
+        {
+            var player = new PlayerCharacter();
+            int expectedMoney = 5;
+            int expectInvestedMoney = 5;
+            player.EarnMoney(10);
+
+            player.InvestMoney(5);
+
+            Assert.AreEqual(expectedMoney, player.Money);
+            Assert.AreEqual(expectInvestedMoney, player.InvestedMoney);
+        }
     }
 }
