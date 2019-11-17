@@ -31,7 +31,7 @@ namespace CharacterLibTests
         public void PlayerTotalMoneyCannotBeReducedBelowZero()
         {
             var player = new PlayerCharacter();
-            int expectedMoney = 0;
+            int expectedMoney = 10;
             player.Money = 10;
 
             player.SpendMoney(15);
@@ -68,8 +68,8 @@ namespace CharacterLibTests
         public void PlayerCannotInvestMoretThanTotalMoney()
         {
             var player = new PlayerCharacter();
-            int expectedMoney = 0;
-            int expectedInvestedMoney = 7;
+            int expectedMoney = 7;
+            int expectedInvestedMoney = 0;
             player.EarnMoney(7);
 
             player.InvestMoney(10);

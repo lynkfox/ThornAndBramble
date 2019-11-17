@@ -11,10 +11,10 @@ namespace CharacterLib
 
         public void SpendMoney(int moneySpent)
         {
-            this.Money -= moneySpent;
-            if (this.Money < 0)
+            
+            if (this.Money >= moneySpent)
             {
-                this.Money = 0;
+                this.Money -= moneySpent;
             }
         }
 
@@ -25,12 +25,12 @@ namespace CharacterLib
 
         public void InvestMoney(int moneyInvested)
         {
-            if(moneyInvested > this.Money)
+            if(moneyInvested <= this.Money)
             {
-                moneyInvested = this.Money;
+                this.Money -= moneyInvested;
+                this.InvestedMoney += moneyInvested;
             }
-            this.Money -= moneyInvested;
-            this.InvestedMoney += moneyInvested;
+            
         }
     }
 }
