@@ -40,12 +40,17 @@ namespace CharacterLib
 
         public void AddTalent(Talent newTalent)
         {
-            if(newTalent.Cost <= this.Money)
+            if(newTalent.Cost <= this.Money && !Talents.Contains(newTalent))
             {
                 InvestMoney(newTalent.Cost);
                 Talents.Add(newTalent);
             }
             
+        }
+
+        public int NumberOfTalents()
+        {
+            return Talents.Count;
         }
     }
 }

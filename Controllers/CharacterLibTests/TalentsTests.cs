@@ -25,5 +25,6 @@ namespace CharacterLibTests
 
             Assert.AreEqual(cost, talent.Cost);
         }
+
     }
 }

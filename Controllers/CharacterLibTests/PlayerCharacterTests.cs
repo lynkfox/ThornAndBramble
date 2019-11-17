@@ -89,7 +89,7 @@ namespace CharacterLibTests
 
             player.AddTalent(genericTalent);
 
-            Assert.IsTrue(player.Talents.Count > 0);
+            Assert.IsTrue(player.NumberOfTalents() > 0);
             
         }
 
@@ -112,11 +112,30 @@ namespace CharacterLibTests
         {
             var player = new PlayerCharacter();
             player.EarnMoney(1);
+            int expectedTalentCount = 0;
 
             player.AddTalent(genericTalent);
 
-            Assert.IsTrue(player.Talents.Count == 0);
+            Assert.AreEqual(expectedTalentCount, player.NumberOfTalents());
         }
+
+        [TestMethod]
+        public void TalentAddWillNotAddDuplicateTalents()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(20);
+            int expectedTalentCount = 1;
+
+            player.AddTalent(genericTalent);
+            player.AddTalent(genericTalent);
+
+            Assert.AreEqual(expectedTalentCount, player.NumberOfTalents());
+
+
+        }
+
+        //Next Test - IfTalentAlreadyExistsIncreaseTalentLevel - needs tests in Talent first.
+        
 
     }
 }
