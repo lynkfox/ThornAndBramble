@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharacterLib", "CharacterLib.csproj", "{3FDB59C6-C30E-40D1-8C0F-BFA1C8C9B9DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterLibTests", "..\CharacterLibTests\CharacterLibTests.csproj", "{8E9F9125-6835-4151-990B-EA45025DF4F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharacterLibTests", "..\CharacterLibTests\CharacterLibTests.csproj", "{8E9F9125-6835-4151-990B-EA45025DF4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
