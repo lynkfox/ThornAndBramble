@@ -26,5 +26,17 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedMoney, player.Money);
         }
+
+        [TestMethod]
+        public void PlayerTotalMoneyCannotBeReducedBelowZero()
+        {
+            var player = new PlayerCharacter();
+            int expectedMoney = 0;
+            player.Money = 10;
+
+            player.SpendMoney(15);
+
+            Assert.AreEqual(expectedMoney, player.Money);
+        }
     }
 }

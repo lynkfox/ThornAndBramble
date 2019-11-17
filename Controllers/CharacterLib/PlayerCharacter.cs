@@ -10,7 +10,11 @@ namespace CharacterLib
 
         public void SpendMoney(int moneySpent)
         {
-            this.Money = 10;
+            this.Money -= moneySpent;
+            if (this.Money < 0)
+            {
+                this.Money = 0;
+            }
         }
     }
 }
