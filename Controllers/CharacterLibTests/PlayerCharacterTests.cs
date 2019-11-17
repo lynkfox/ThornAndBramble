@@ -8,7 +8,7 @@ namespace CharacterLibTests
     {
         [TestMethod]
         public void PlayerCharacterCanReturnItsTotalMoney()
-        { 
+        {
             var player = new PlayerCharacter();
             int expectedMoney = 0;
 
@@ -62,6 +62,20 @@ namespace CharacterLibTests
 
             Assert.AreEqual(expectedMoney, player.Money);
             Assert.AreEqual(expectInvestedMoney, player.InvestedMoney);
+        }
+
+        [TestMethod]
+        public void PlayerCannotInvestMoretThanTotalMoney()
+        {
+            var player = new PlayerCharacter();
+            int expectedMoney = 0;
+            int expectedInvestedMoney = 7;
+            player.EarnMoney(7);
+
+            player.InvestMoney(10);
+
+            Assert.AreEqual(expectedMoney, player.Money);
+            Assert.AreEqual(expectedInvestedMoney, player.InvestedMoney);
         }
     }
 }

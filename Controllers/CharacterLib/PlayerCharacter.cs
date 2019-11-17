@@ -25,6 +25,10 @@ namespace CharacterLib
 
         public void InvestMoney(int moneyInvested)
         {
+            if(moneyInvested > this.Money)
+            {
+                moneyInvested = this.Money;
+            }
             this.Money -= moneyInvested;
             this.InvestedMoney += moneyInvested;
         }
