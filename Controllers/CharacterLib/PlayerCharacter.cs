@@ -4,8 +4,8 @@ using System.Text;
 
 namespace CharacterLib
 {
-    class PlayerCharacter : CharacterBase
+    public class PlayerCharacter : CharacterBase
     {
-       
+        public int Money { get; set; } = 0;
     }
 }

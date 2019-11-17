@@ -13,6 +13,7 @@ namespace CharacterLibTests
         {
             var npc = new MonsterCharacter();
             int expectedHealth = 110;
+
             npc.IncreaseLevel(1);
 
             Assert.AreEqual(expectedHealth, npc.HealthCurrent);
