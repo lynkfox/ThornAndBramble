@@ -12,6 +12,7 @@ namespace CharacterLib
 
         public int Money { get; set; } = 0;
         public int InvestedMoney { get; set; } = 0;
+        public List<Talent> Talents { get; set; } = new List<Talent>();
 
         public void SpendMoney(int moneySpent)
         {
@@ -33,6 +34,16 @@ namespace CharacterLib
             {
                 this.Money -= moneyInvested;
                 this.InvestedMoney += moneyInvested;
+            }
+            
+        }
+
+        public void AddTalent(Talent newTalent)
+        {
+            if(newTalent.Cost <= this.Money)
+            {
+                InvestMoney(newTalent.Cost);
+                Talents.Add(newTalent);
             }
             
         }

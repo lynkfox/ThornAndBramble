@@ -6,6 +6,9 @@ namespace CharacterLibTests
     [TestClass]
     public class PlayerCharacterTests
     {
+
+        Talent genericTalent = new Talent();
+
         [TestMethod]
         public void PlayerCharacterCanReturnItsTotalMoney()
         {
@@ -77,5 +80,43 @@ namespace CharacterLibTests
             Assert.AreEqual(expectedMoney, player.Money);
             Assert.AreEqual(expectedInvestedMoney, player.InvestedMoney);
         }
+
+        [TestMethod]
+        public void PlayerCharacterStoresTalents()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(10);
+
+            player.AddTalent(genericTalent);
+
+            Assert.IsTrue(player.Talents.Count > 0);
+            
+        }
+
+        [TestMethod]
+        public void AddingTalentInvestsTheCostFromMoney()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(10);
+            int expectedMoney = 5;
+            int expectedInvested = 5;
+
+            player.AddTalent(genericTalent);
+
+            Assert.AreEqual(expectedMoney, player.Money);
+            Assert.AreEqual(expectedInvested, player.InvestedMoney);
+        }
+
+        [TestMethod]
+        public void TalentIsNotAddedIfCostIsMoreThanCurrentMoney()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(1);
+
+            player.AddTalent(genericTalent);
+
+            Assert.IsTrue(player.Talents.Count == 0);
+        }
+
     }
 }
