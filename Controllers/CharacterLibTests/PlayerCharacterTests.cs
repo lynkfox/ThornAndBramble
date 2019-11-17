@@ -28,7 +28,7 @@ namespace CharacterLibTests
         }
 
         [TestMethod]
-        public void PlayerTotalMoneyCannotBeReducedBelowZero()
+        public void PlayerMoneyRemainsUnchangedIfAttemptingToSpendMoreThanHave()
         {
             var player = new PlayerCharacter();
             int expectedMoney = 10;
