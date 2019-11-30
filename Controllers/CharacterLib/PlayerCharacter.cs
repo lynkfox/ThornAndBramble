@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CharacterLib
@@ -40,17 +41,37 @@ namespace CharacterLib
 
         public void AddTalent(Talent newTalent)
         {
-            if(newTalent.Cost <= this.Money && !Talents.Contains(newTalent))
+            if(newTalent.Cost <= this.Money)
             {
                 InvestMoney(newTalent.Cost);
-                Talents.Add(newTalent);
+
+                AddNewTalentOrIncreaseLevelOfExistingTalent(newTalent);
+                
             }
             
+        }
+
+        private void AddNewTalentOrIncreaseLevelOfExistingTalent(Talent newTalent)
+        {
+            if (Talents.Contains(newTalent))
+            {
+                Talents.Where(x => x == newTalent).First().Level++;
+            }else
+            {
+                Talents.Add(newTalent);
+            }
         }
 
         public int NumberOfTalents()
         {
             return Talents.Count;
+        }
+
+        public int TalentLevel(string talentName)
+        {
+            Talent specificTalent = Talents.Where(x => x.Name == talentName).First();
+
+            return specificTalent.Level;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace CharacterLib
         public string Name { get; set; }
         public int Cost { get; set; }
         public int Level { get; set; }
+        public string Description { get; set; }
 
         public Talent() : this(5)
         {
@@ -17,7 +18,7 @@ namespace CharacterLib
         }
         public Talent(int cost) : this("DefaultTalent", cost)
         {
-            
+            Description = "This is a Default Talent";
         }
 
         public Talent(string name, int cost)

@@ -130,11 +130,30 @@ namespace CharacterLibTests
             player.AddTalent(genericTalent);
 
             Assert.AreEqual(expectedTalentCount, player.NumberOfTalents());
+        }
 
+        [TestMethod]
+        public void IfTalentAlreadyExistsIncreaseTalentLevel()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(20);
+            int expectedTalentLevel = 2;
+
+            player.AddTalent(genericTalent);
+            player.AddTalent(genericTalent);
+
+            Assert.AreEqual(expectedTalentLevel, player.TalentLevel("DefaultTalent"));
 
         }
 
-        //Next Test - IfTalentAlreadyExistsIncreaseTalentLevel - needs tests in Talent first.
+        
+
+        /* Exceptions that will have to be added for a Test
+         * 
+         * TalentDoesNotExist - for TalentLevel
+         * NotEnoughMoney - for Investing or Spending money
+         */
+
         
 
     }
