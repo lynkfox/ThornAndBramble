@@ -18,7 +18,7 @@ namespace CharacterLib
 
         //CombatStats
 
-        public double AttackPower { get; set; } = 1;
+        public double AttackPower { get; set; } = 10;
         public double CritChance { get; set; } = .1;
         public double CritMultiplier { get; set; } = 1.5;
         public double DodgeChance { get; set; } = .3;
@@ -29,6 +29,7 @@ namespace CharacterLib
         //Level Gain Values
 
         public double HealthPercentageGrowthPerLevel { get; set; } = .1;
+        public double EnergyPercentageGrowthPerLevel { get; set; } = .1;
         public double AttackPowerPercentageGrowthPerLevel { get; set; } = .1;
         public double CritChancePercentageGrowthPerLevel { get; set; } = .01;
         public double CritMultiplierPercentageGrowthPerLevel { get; set; } = 0;

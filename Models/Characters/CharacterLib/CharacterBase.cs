@@ -6,21 +6,7 @@ namespace CharacterLib
 {
     public class CharacterBase
     {
-        //Character Stats
-        public int HealthCurrent { get; set; }
-        public int HealthMax { get; set; }
-        public int EnergyCurrent { get; set; }
-        public int EnergyMax { get; set; }
-
-        //CombatStats
-
-        public double AttackPower { get; set; }
-        public double CritChance { get; set; }
-        public double CritMultiplier { get; set; }
-        public double DodgeChance { get; set; }
-        public int MovementRate { get; set; }
-        public int Initiative { get; set; }
-        public List<AttackProfile> AttackList { get; set; } = new List<AttackProfile>();
+        public StatProfile CharacterStat { get; set; }
 
         public CharacterBase() : this(new StatProfile())
         {
@@ -28,50 +14,46 @@ namespace CharacterLib
         }
         public CharacterBase(StatProfile baseProfileStats)
         {
-            HealthCurrent = baseProfileStats.HealthCurrent;
-            HealthMax = baseProfileStats.HealthMax;
-            EnergyCurrent = baseProfileStats.EnergyCurrent;
-            EnergyMax = baseProfileStats.EnergyMax;
-            AttackList = baseProfileStats.AttackList;
+            CharacterStat = baseProfileStats;
 
-        }
+    }
 
 
         public void TakeDamage(int damage)
         {
-            this.HealthCurrent -= damage;
+            CharacterStat.HealthCurrent -= damage;
 
-            if (this.HealthCurrent < 0)
+            if (CharacterStat.HealthCurrent < 0)
             {
-                this.HealthCurrent = 0;
+                CharacterStat.HealthCurrent = 0;
             }
         }
 
         public void HealDamage(int heal)
         {
-            this.HealthCurrent += heal;
+            CharacterStat.HealthCurrent += heal;
 
-            if (this.HealthCurrent > this.HealthMax)
+            if (CharacterStat.HealthCurrent > CharacterStat.HealthMax)
             {
-                this.HealthCurrent = this.HealthMax;
+                CharacterStat.HealthCurrent = CharacterStat.HealthMax;
             }
         }
 
 
         public void SpendEnergy(int energySpent)
         {
-            this.EnergyCurrent -= energySpent;
-            if (this.EnergyCurrent < 0)
+            CharacterStat.EnergyCurrent -= energySpent;
+            if (CharacterStat.EnergyCurrent < 0)
             {
-                this.EnergyCurrent = 0;
+                CharacterStat.EnergyCurrent = 0;
             }
         }
         public void RestoreEnergy(int energyReturned)
         {
-            this.EnergyCurrent += energyReturned;
-            if (this.EnergyCurrent > EnergyMax)
+            CharacterStat.EnergyCurrent += energyReturned;
+            if (CharacterStat.EnergyCurrent > CharacterStat.EnergyMax)
             {
-                this.EnergyCurrent = EnergyMax;
+                CharacterStat.EnergyCurrent = CharacterStat.EnergyMax;
             }
         }
     }
