@@ -18,6 +18,10 @@ namespace CharacterLib
 
         private List<Talent> ApprovedTalents=null;
 
+        public PlayerCharacter() : base()
+        {
+
+        }
 
         public void SpendMoney(int moneySpent)
         {

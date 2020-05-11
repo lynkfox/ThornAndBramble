@@ -24,12 +24,17 @@ namespace CharacterLib
 
         public CharacterBase()
         {
-            AttackList.Add(new AttackProfile());
+            AddBasicAttack();
             this.HealthCurrent = 100;
             this.HealthMax = 100;
             this.EnergyCurrent = 50;
             this.EnergyMax = 50;
 
+        }
+
+        public void AddBasicAttack()
+        {
+            this.AttackList.Add(new AttackProfile());
         }
 
         public void TakeDamage(int damage)
