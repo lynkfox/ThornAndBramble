@@ -22,5 +22,10 @@ namespace BattleController
             PlayersOnField.Add(playerCharacter);
             PlayerCount = PlayersOnField.Count;
         }
+
+        public double CalculateAttackChance(AttackProfile attack, double dodgeChance)
+        {
+            return attack.HitChance - dodgeChance;
+        }
     }
 }
