@@ -33,7 +33,7 @@ namespace CharacterLib
             
         }
 
-        public MonsterCharacter(int startingLevel)
+        public MonsterCharacter(int startingLevel) : base()
         {
             this.HealthCurrent = STARTINGhealth;
             this.HealthMax = STARTINGhealth;

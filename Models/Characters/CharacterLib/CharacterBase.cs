@@ -22,20 +22,20 @@ namespace CharacterLib
         public int Initiative { get; set; }
         public List<AttackProfile> AttackList { get; set; } = new List<AttackProfile>();
 
-        public CharacterBase()
+        public CharacterBase() : this(new StatProfile())
         {
-            AddBasicAttack();
-            this.HealthCurrent = 100;
-            this.HealthMax = 100;
-            this.EnergyCurrent = 50;
-            this.EnergyMax = 50;
+
+        }
+        public CharacterBase(StatProfile baseProfileStats)
+        {
+            HealthCurrent = baseProfileStats.HealthCurrent;
+            HealthMax = baseProfileStats.HealthMax;
+            EnergyCurrent = baseProfileStats.EnergyCurrent;
+            EnergyMax = baseProfileStats.EnergyMax;
+            AttackList = baseProfileStats.AttackList;
 
         }
 
-        public void AddBasicAttack()
-        {
-            this.AttackList.Add(new AttackProfile());
-        }
 
         public void TakeDamage(int damage)
         {
