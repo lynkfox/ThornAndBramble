@@ -15,6 +15,10 @@ namespace CharacterLib
         public int InvestedMoney { get; set; } = 0;
         public List<Talent> Talents { get; set; } = new List<Talent>();
 
+
+        private List<Talent> ApprovedTalents=null;
+
+
         public void SpendMoney(int moneySpent)
         {
             
@@ -41,7 +45,11 @@ namespace CharacterLib
 
         public void AddTalent(Talent newTalent)
         {
-            if(newTalent.Cost <= this.Money)
+            if(!ApprovedTalents.Contains(newTalent))
+            {
+                throw new PlayerDoesNotHaveTalent(newTalent.Name);
+            }
+            else if(newTalent.Cost <= this.Money)
             {
                 InvestMoney(newTalent.Cost);
 
@@ -53,6 +61,7 @@ namespace CharacterLib
 
         private void AddNewTalentOrIncreaseLevelOfExistingTalent(Talent newTalent)
         {
+
             if (Talents.Contains(newTalent))
             {
                 Talents.Where(x => x == newTalent).First().Level++;
@@ -72,6 +81,11 @@ namespace CharacterLib
             Talent specificTalent = Talents.Where(x => x.Name == talentName).First();
 
             return specificTalent.Level;
+        }
+
+        public void SetupTalents(List<Talent> possibleTalents)
+        {
+            ApprovedTalents = possibleTalents;
         }
     }
 }

@@ -1,13 +1,31 @@
 ﻿using CharacterLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterLibTests
 {
     [TestClass]
     public class PlayerCharacterTests
     {
+        //Setups
 
         Talent genericTalent = new Talent();
+        Talent doesNotHaveThisTalent = new Talent("NonTalent", 1);
+        
+
+
+        private List<Talent> SetupGenericTalentList()
+        {
+            List<Talent> Talents = new List<Talent>();
+
+            Talents.Add(genericTalent);
+            Talents.Add(new Talent("Level1Talent", 5));
+            Talents.Add(new Talent("Level2Talent", 10));
+            Talents.Add(new Talent("Level3Talent", 15));
+
+            return Talents;
+        }
 
         [TestMethod]
         public void PlayerCharacterCanReturnItsTotalMoney()
@@ -85,6 +103,7 @@ namespace CharacterLibTests
         public void PlayerCharacterStoresTalents()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(10);
 
             player.AddTalent(genericTalent);
@@ -94,9 +113,10 @@ namespace CharacterLibTests
         }
 
         [TestMethod]
-        public void AddingTalentInvestsTheCostFromMoney()
+        public void TalentAddedInvestsTheCostFromMoney()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(10);
             int expectedMoney = 5;
             int expectedInvested = 5;
@@ -111,6 +131,7 @@ namespace CharacterLibTests
         public void TalentIsNotAddedIfCostIsMoreThanCurrentMoney()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(1);
             int expectedTalentCount = 0;
 
@@ -123,6 +144,7 @@ namespace CharacterLibTests
         public void TalentAddWillNotAddDuplicateTalents()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(20);
             int expectedTalentCount = 1;
 
@@ -133,9 +155,10 @@ namespace CharacterLibTests
         }
 
         [TestMethod]
-        public void IfTalentAlreadyExistsIncreaseTalentLevel()
+        public void TalentAlreadyExistsIncreaseTalentLevel()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(20);
             int expectedTalentLevel = 2;
 
@@ -146,7 +169,27 @@ namespace CharacterLibTests
 
         }
 
+        [TestMethod]
+        public void PlayerCharacterCanBeAssignedTalentsThatAreViableToBeTaken()
+        {
+            var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
+        }
+
         
+
+        /*
+        [TestMethod]
+        public void TalentThrowsCharacterDoesNotHaveTalentExceptionWhenLevelUpNonContainedTalent()
+        {
+            var player = new PlayerCharacter();
+            player.EarnMoney(20);
+
+            player.AddTalent(genericTalent);
+
+            Assert.ThrowsException<PlayerDoesNotHaveTalent>(() => player.AddTalent(doesNotHaveThisTalent));
+        }
+        */
 
         /* Exceptions that will have to be added for a Test
          * 
@@ -154,7 +197,7 @@ namespace CharacterLibTests
          * NotEnoughMoney - for Investing or Spending money
          */
 
-        
+
 
     }
 }

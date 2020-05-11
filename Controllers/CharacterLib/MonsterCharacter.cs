@@ -19,7 +19,7 @@ namespace CharacterLib
         private const int MOVE = 5;
         private const int INIT = 5;
 
-        //Level Gain Values
+        //Default Level Gain Values
 
         private const double HEALTHgainPERlevel = .1;
         private const double ATTACKgainPERlevel = 5;
