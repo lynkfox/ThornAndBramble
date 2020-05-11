@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleController", "BattleController\BattleController.csproj", "{3EAD5FF8-5E49-480E-8CC0-B94480417661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleControllerUnitTests", "BattleControllerUnitTests\BattleControllerUnitTests.csproj", "{AA4C59A0-E56A-4F26-AF84-0581D33565E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EAD5FF8-5E49-480E-8CC0-B94480417661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAD5FF8-5E49-480E-8CC0-B94480417661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAD5FF8-5E49-480E-8CC0-B94480417661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAD5FF8-5E49-480E-8CC0-B94480417661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4C59A0-E56A-4F26-AF84-0581D33565E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4C59A0-E56A-4F26-AF84-0581D33565E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4C59A0-E56A-4F26-AF84-0581D33565E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4C59A0-E56A-4F26-AF84-0581D33565E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D24CE650-A159-4819-9463-7CA43621060D}
+	EndGlobalSection
+EndGlobal
