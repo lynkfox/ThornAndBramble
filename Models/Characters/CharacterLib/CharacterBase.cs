@@ -20,10 +20,11 @@ namespace CharacterLib
         public double DodgeChance { get; set; }
         public int MovementRate { get; set; }
         public int Initiative { get; set; }
-
+        public List<AttackProfile> AttackList { get; set; } = new List<AttackProfile>();
 
         public CharacterBase()
         {
+            AttackList.Add(new AttackProfile());
             this.HealthCurrent = 100;
             this.HealthMax = 100;
             this.EnergyCurrent = 50;
