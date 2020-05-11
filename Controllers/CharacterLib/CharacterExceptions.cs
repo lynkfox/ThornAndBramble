@@ -13,3 +13,15 @@ public class PlayerDoesNotHaveTalent : Exception
     {
     }
 }
+
+public class NotEnoughMoneyToInvest : Exception
+{
+    public NotEnoughMoneyToInvest()
+    {
+    }
+
+    public NotEnoughMoneyToInvest(string message)
+        : base(message)
+    {
+    }
+}

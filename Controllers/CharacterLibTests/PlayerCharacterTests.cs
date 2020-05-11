@@ -135,9 +135,20 @@ namespace CharacterLibTests
             player.EarnMoney(1);
             int expectedTalentCount = 0;
 
-            player.AddTalent(genericTalent);
+            try
+            {
+                player.AddTalent(genericTalent); 
 
-            Assert.AreEqual(expectedTalentCount, player.NumberOfTalents());
+            } catch
+            {
+                //dont care about the exception here. Just testing to make sure it doesnt get added to the players owned talents
+            } finally
+            {
+                Assert.AreEqual(expectedTalentCount, player.NumberOfTalents());
+            }
+
+
+            
         }
 
         [TestMethod]
@@ -188,6 +199,18 @@ namespace CharacterLibTests
             player.AddTalent(genericTalent);
 
             Assert.ThrowsException<PlayerDoesNotHaveTalent>(() => player.AddTalent(doesNotHaveThisTalent));
+        }
+
+        [TestMethod]
+        public void TalentInvestedWhenNotEnoughMoneyThrowsNotEnoughMoneyToInvestException()
+        {
+            var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
+            player.EarnMoney(1);
+
+            
+
+            Assert.ThrowsException<NotEnoughMoneyToInvest>(() => player.AddTalent(genericTalent));
         }
         
 

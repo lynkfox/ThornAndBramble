@@ -56,6 +56,10 @@ namespace CharacterLib
                 AddNewTalentOrIncreaseLevelOfExistingTalent(newTalent);
                 
             }
+            else
+            {
+                throw new NotEnoughMoneyToInvest(newTalent.Name + " costs " + newTalent.Cost);
+            }
             
         }
 
