@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="CharacterLib">
+      <HintPath>..\..\..\Models\Characters\CharacterLib\bin\Debug\netcoreapp2.2\CharacterLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

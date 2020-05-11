@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -10,6 +10,18 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BattleController\BattleController.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="CharacterLib">
+      <HintPath>..\..\..\Models\Characters\CharacterLib\bin\Debug\netcoreapp2.2\CharacterLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
