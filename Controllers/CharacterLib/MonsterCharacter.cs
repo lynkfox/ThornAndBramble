@@ -75,8 +75,10 @@ namespace CharacterLib
 
         private void AdjustHealthLevels(int increaseLevelBy)
         {
-            double increaseMaxHealth = HEALTHgainPERlevel * increaseLevelBy * this.HealthCurrent;
-            this.HealthMax += (int)increaseMaxHealth;
+            for (int i=0; i < increaseLevelBy; i++)
+            {
+                this.HealthMax += (int)Math.Floor(HEALTHgainPERlevel * this.HealthMax);
+            }
             this.HealthCurrent = this.HealthMax;
         }
 

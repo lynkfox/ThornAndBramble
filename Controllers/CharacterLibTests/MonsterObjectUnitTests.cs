@@ -12,9 +12,9 @@ namespace CharacterLibTests
         public void HealthGrowsWithLevelDefaultTo10PercentPerLevel()
         {
             var npc = new MonsterCharacter();
-            int expectedHealth = 110;
+            int expectedHealth = 121; // 100+10 ==110, 10% is 11, so 121 for level 2
 
-            npc.IncreaseLevel(1);
+            npc.IncreaseLevel(2);
 
             Assert.AreEqual(expectedHealth, npc.HealthCurrent);
 
@@ -24,7 +24,7 @@ namespace CharacterLibTests
         public void NewCharacterWithLevelHasAppropriateHealth()
         {
             var npc = new MonsterCharacter(5);
-            int expectedHealth = 140;
+            int expectedHealth = 146; //100,110,121,133,146 (round down)
 
             Assert.AreEqual(expectedHealth, npc.HealthCurrent);
         }
