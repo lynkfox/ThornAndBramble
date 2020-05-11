@@ -178,18 +178,18 @@ namespace CharacterLibTests
 
         
 
-        /*
         [TestMethod]
         public void TalentThrowsCharacterDoesNotHaveTalentExceptionWhenLevelUpNonContainedTalent()
         {
             var player = new PlayerCharacter();
+            player.SetupTalents(SetupGenericTalentList());
             player.EarnMoney(20);
 
             player.AddTalent(genericTalent);
 
             Assert.ThrowsException<PlayerDoesNotHaveTalent>(() => player.AddTalent(doesNotHaveThisTalent));
         }
-        */
+        
 
         /* Exceptions that will have to be added for a Test
          * 
