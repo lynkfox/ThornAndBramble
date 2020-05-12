@@ -8,9 +8,10 @@ namespace CharacterLib
     {
 
 
-        //Default Level Gain Values
 
 
+        public string Name { get; set; } = "DefaultCharacter";
+        public string Description { get; set; } = "This Character Object Has No Description Set";
         public int HealthCurrent { get; set; } = 100;
         public int HealthMax { get; set; } = 100;
         public int EnergyCurrent { get; set; } = 50;

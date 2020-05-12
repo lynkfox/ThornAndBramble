@@ -6,11 +6,16 @@ namespace CharacterLib
     {
         //Character Stats
         public int Level { get; set; }
-        
+
 
         public MonsterCharacter() : this(new StatProfile(), 1)
         {
-            
+
+        }
+
+        public MonsterCharacter(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, 1)
+        {
+            this.CharacterStat.Name = monsterName;
         }
 
         public MonsterCharacter(StatProfile baseMonsterStats, int startingLevel) : base(baseMonsterStats)

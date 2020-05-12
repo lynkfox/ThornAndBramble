@@ -23,6 +23,11 @@ namespace CharacterLib
 
         }
 
+        public PlayerCharacter(string characterName) : this()
+        {
+            this.CharacterStat.Name = characterName;
+        }
+
         public void SpendMoney(int moneySpent)
         {
             
