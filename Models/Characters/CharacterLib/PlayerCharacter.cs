@@ -124,12 +124,20 @@ namespace CharacterLib
             return InvestedTalents;
         }
 
-        public void RemoveTalent(Talent genericTalent)
+        public void RemoveTalent(Talent talentToRemove)
         {
-            var playersTalent = InvestedTalents.Where(x => x.Name == genericTalent.Name).First();
+            if(PlayerAlreadyHaveTalent(talentToRemove))
+            {
+                var playersTalent = InvestedTalents.Where(x => x.Name == talentToRemove.Name).First();
 
-            InvestMoney(-playersTalent.CostsAtLevel(playersTalent.CurrentLevel));
-            playersTalent.LevelDown();
+                InvestMoney(-playersTalent.CostsAtLevel(playersTalent.CurrentLevel));
+                playersTalent.LevelDown();
+            }
+            else
+            {
+                throw new PlayerDoesNotHaveTalent();
+            }
+            
 
         }
     }
