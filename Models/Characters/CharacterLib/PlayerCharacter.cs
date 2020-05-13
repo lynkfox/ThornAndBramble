@@ -98,7 +98,7 @@ namespace CharacterLib
                 InvestedTalents.Add(newTalent);
             }
 
-            InvestedTalents.Where(x => x == newTalent).First().LevelUp();
+            InvestedTalents.Where(x => x.Name == newTalent.Name).First().LevelUp();
             InvestMoney(newTalent.CostsAtLevel(newTalent.CurrentLevel));
         }
 
@@ -122,6 +122,15 @@ namespace CharacterLib
         public List<Talent> CheckInvestedTalents()
         {
             return InvestedTalents;
+        }
+
+        public void RemoveTalent(Talent genericTalent)
+        {
+            var playersTalent = InvestedTalents.Where(x => x.Name == genericTalent.Name).First();
+
+            InvestMoney(-playersTalent.CostsAtLevel(playersTalent.CurrentLevel));
+            playersTalent.LevelDown();
+
         }
     }
 }
