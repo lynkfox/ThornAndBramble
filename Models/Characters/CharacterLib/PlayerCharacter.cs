@@ -13,7 +13,7 @@ namespace CharacterLib
 
         public int Money { get; set; } = 0;
         public int InvestedMoney { get; set; } = 0;
-        public List<Talent> Talents { get; set; } = new List<Talent>();
+        public List<Talent> InvestedTalents { get; set; } = new List<Talent>();
 
 
         private List<Talent> ApprovedTalents=null;
@@ -75,23 +75,23 @@ namespace CharacterLib
         private void AddNewTalentOrIncreaseLevelOfExistingTalent(Talent newTalent)
         {
 
-            if (Talents.Contains(newTalent))
+            if (InvestedTalents.Contains(newTalent))
             {
-                Talents.Where(x => x == newTalent).First().Level++;
+                InvestedTalents.Where(x => x == newTalent).First().Level++;
             }else
             {
-                Talents.Add(newTalent);
+                InvestedTalents.Add(newTalent);
             }
         }
 
         public int NumberOfTalents()
         {
-            return Talents.Count;
+            return InvestedTalents.Count;
         }
 
         public int TalentLevel(string talentName)
         {
-            Talent specificTalent = Talents.Where(x => x.Name == talentName).First();
+            Talent specificTalent = InvestedTalents.Where(x => x.Name == talentName).First();
 
             return specificTalent.Level;
         }
@@ -99,6 +99,11 @@ namespace CharacterLib
         public void SetupTalents(List<Talent> possibleTalents)
         {
             ApprovedTalents = possibleTalents;
+        }
+
+        public List<Talent> CheckInvestedTalents()
+        {
+            return InvestedTalents;
         }
     }
 }
