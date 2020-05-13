@@ -1,4 +1,5 @@
 ﻿using System;
+using CharacterLib.Structures;
 
 namespace CharacterLib
 {
@@ -13,7 +14,7 @@ namespace CharacterLib
 
         }
 
-        public Monster(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, 1)
+        public Monster(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, startingLevel)
         {
             this.CharacterStat.Name = monsterName;
         }

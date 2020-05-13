@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CharacterLib.Profiles;
+using CharacterLib.Structures;
 
 namespace CharacterLib
 {

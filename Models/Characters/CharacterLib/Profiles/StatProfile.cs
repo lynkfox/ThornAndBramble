@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CharacterLib
+namespace CharacterLib.Structures
 {
     public class StatProfile
     {
@@ -22,7 +22,15 @@ namespace CharacterLib
         public double DodgeChance { get; set; } = .3;
         public int MovementRate { get; set; } = 5;
         public int Initiative { get; set; } = 10;
-        public List<AttackProfile> AttackList { get; set; } = new List<AttackProfile>() { new AttackProfile() };
+        public List<AttackProfile> AttackList { get; set; } = new List<AttackProfile>()
+        {
+            new AttackProfile()
+            {
+                Name = "Strike",
+                HitChance = .75,
+                BaseDamage = 5
+            }
+        };
 
         //Level Gain Values
 

@@ -13,9 +13,14 @@ namespace CharacterLib
 
         public int Money { get; set; } = 0;
         public int InvestedMoney { get; set; } = 0;
-        public List<Talent> InvestedTalents { get; set; } = new List<Talent>();
 
+        public readonly Dictionary<string,double> StatIncreases= new Dictionary<string,double>();
+
+        public readonly List<Talent> InvestedTalents  = new List<Talent>();
+        
         private List<Talent> ApprovedTalents=null;
+
+
 
         public Player() : base()
         {

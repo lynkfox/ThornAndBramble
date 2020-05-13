@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CharacterLib.Profiles
+namespace CharacterLib.Structures
 {
     public class TalentProfile
     {
