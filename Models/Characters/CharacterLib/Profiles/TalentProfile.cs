@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CharacterLib.Profiles
 {
-    class TalentProfile
+    public class TalentProfile
     {
         public string Name { get; set; } = "GenericTalent";
         public string Description { get; set; } = "This Talent does not have a Description set.";

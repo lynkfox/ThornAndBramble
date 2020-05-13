@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CharacterLib.Profiles;
 
 namespace CharacterLib
 {
@@ -14,9 +15,20 @@ namespace CharacterLib
         public int[] UpgradeCostProgression { get; set; }
         public string Description { get; set; }
 
+        
         public Talent() : this(new int[]{5,10,15,20,25})
         {
 
+        }
+        
+        public Talent(TalentProfile profile)
+        {
+            this.Name = profile.Name;
+            this.TotalCost = 0;
+            this.CurrentLevel = 0;
+            this.LevelCap = profile.LevelCap;
+            this.UpgradeCostProgression = profile.CostProgression;
+            this.Description = profile.Description;
         }
         public Talent(int[] cost) : this("DefaultTalent", cost)
         {
