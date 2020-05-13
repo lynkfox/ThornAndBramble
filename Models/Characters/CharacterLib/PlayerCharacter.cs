@@ -51,36 +51,55 @@ namespace CharacterLib
             
         }
 
-        public void AddTalent(Talent newTalent)
+        public void AddTalent(Talent potentialTalent)
         {
-            if(!ApprovedTalents.Contains(newTalent))
-            {
-                throw new PlayerDoesNotHaveTalent(newTalent.Name);
-            }
-            else if(newTalent.TotalCost <= this.Money)
-            {
-                InvestMoney(newTalent.TotalCost);
+            Talent playersTalent; 
 
-                AddNewTalentOrIncreaseLevelOfExistingTalent(newTalent);
-                
+            if(!ApprovedTalents.Contains(potentialTalent))
+            {
+                throw new PlayerDoesNotHaveTalent(potentialTalent.Name);
+            }
+            else if(PlayerAlreadyHaveTalent(potentialTalent))
+            {
+                playersTalent = InvestedTalents.Where(x => x.Name == potentialTalent.Name).First();
+
             }
             else
             {
-                throw new NotEnoughMoneyToInvest(newTalent.Name + " costs " + newTalent.TotalCost);
+                playersTalent = potentialTalent;
+            }
+
+
+            if(PlayerCanAffordCost(playersTalent.CostsAtLevel(playersTalent.CurrentLevel+1)))
+            {
+                AddNewTalentOrIncreaseLevelOfExistingTalent(potentialTalent);
+            }
+            else
+            {
+                throw new NotEnoughMoneyToInvest(potentialTalent.Name + " costs " + potentialTalent.CostsAtLevel(playersTalent.CurrentLevel+1));
             }
             
+        }
+
+        private bool PlayerAlreadyHaveTalent(Talent potentialTalent)
+        {
+            return InvestedTalents.Contains(potentialTalent);
+        }
+        private bool PlayerCanAffordCost(int cost)
+        {
+            return cost <= this.Money;
         }
 
         private void AddNewTalentOrIncreaseLevelOfExistingTalent(Talent newTalent)
         {
 
-            if (InvestedTalents.Contains(newTalent))
-            {
-                InvestedTalents.Where(x => x == newTalent).First().CurrentLevel++;
-            }else
+            if (!InvestedTalents.Contains(newTalent))
             {
                 InvestedTalents.Add(newTalent);
             }
+
+            InvestedTalents.Where(x => x == newTalent).First().LevelUp();
+            InvestMoney(newTalent.CostsAtLevel(newTalent.CurrentLevel));
         }
 
         public int NumberOfTalents()

@@ -55,5 +55,18 @@ namespace CharacterLib
                 TotalCost -= UpgradeCostProgression[CurrentLevel]; 
             }
         }
+
+        public int CostsAtLevel(int level)
+        {
+            if (level == 0)
+            {
+                throw new TalentDoesNotHaveACostAtLevelZero();
+            }
+            else
+            {
+                return UpgradeCostProgression[level - 1];
+            }
+            
+        }
     }
 }

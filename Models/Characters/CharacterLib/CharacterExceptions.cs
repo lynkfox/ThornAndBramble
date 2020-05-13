@@ -25,3 +25,15 @@ public class NotEnoughMoneyToInvest : Exception
     {
     }
 }
+
+public class TalentDoesNotHaveACostAtLevelZero : Exception
+{
+    public TalentDoesNotHaveACostAtLevelZero()
+    {
+    }
+
+    public TalentDoesNotHaveACostAtLevelZero(string message)
+        : base(message)
+    {
+    }
+}
