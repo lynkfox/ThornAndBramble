@@ -8,42 +8,51 @@ namespace CharacterLib
     {
 
         public string Name { get; set; }
-        public int Cost { get; set; }
-        public int Level { get; set; }
+        public int TotalCost { get; set; }
+        public int CurrentLevel { get; set; }
         public int LevelCap { get; set; }
         public int[] UpgradeCostProgression { get; set; }
         public string Description { get; set; }
 
-        public Talent() : this(5)
+        public Talent() : this(new int[]{5,10,15,20,25})
         {
 
         }
-        public Talent(int cost) : this("DefaultTalent", cost)
+        public Talent(int[] cost) : this("DefaultTalent", cost)
         {
             Description = "This is a Default Talent";
         }
 
-        public Talent(string name, int cost)
+        public Talent(string name, int[] cost)
         {
-            Cost = cost;
+            TotalCost = 0;
             Name = name;
-            Level = 1;
+            CurrentLevel = 0;
             LevelCap = 5;
-            UpgradeCostProgression = new int[]{ 5, 10, 15, 20, 25};
+            UpgradeCostProgression = cost;
         }
 
         public void LevelUp()
         {
-            this.Level++;
+            
+            this.CurrentLevel++;
+            TotalCost += UpgradeCostProgression[CurrentLevel-1];
         }
 
         public void LevelDown()
         {
-            this.Level--;
+            this.CurrentLevel--;
+            
 
-            if(this.Level < 0)
+            if (this.CurrentLevel <= 0)
             {
-                this.Level = 0;
+                this.CurrentLevel = 0;
+                this.TotalCost = 0;
+            }
+            else
+            {
+                //Did you forget Arrays start at 0? xD
+                TotalCost -= UpgradeCostProgression[CurrentLevel]; 
             }
         }
     }

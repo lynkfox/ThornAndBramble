@@ -57,16 +57,16 @@ namespace CharacterLib
             {
                 throw new PlayerDoesNotHaveTalent(newTalent.Name);
             }
-            else if(newTalent.Cost <= this.Money)
+            else if(newTalent.TotalCost <= this.Money)
             {
-                InvestMoney(newTalent.Cost);
+                InvestMoney(newTalent.TotalCost);
 
                 AddNewTalentOrIncreaseLevelOfExistingTalent(newTalent);
                 
             }
             else
             {
-                throw new NotEnoughMoneyToInvest(newTalent.Name + " costs " + newTalent.Cost);
+                throw new NotEnoughMoneyToInvest(newTalent.Name + " costs " + newTalent.TotalCost);
             }
             
         }
@@ -76,7 +76,7 @@ namespace CharacterLib
 
             if (InvestedTalents.Contains(newTalent))
             {
-                InvestedTalents.Where(x => x == newTalent).First().Level++;
+                InvestedTalents.Where(x => x == newTalent).First().CurrentLevel++;
             }else
             {
                 InvestedTalents.Add(newTalent);
@@ -92,7 +92,7 @@ namespace CharacterLib
         {
             Talent specificTalent = InvestedTalents.Where(x => x.Name == talentName).First();
 
-            return specificTalent.Level;
+            return specificTalent.CurrentLevel;
         }
 
         public void SetupTalents(List<Talent> possibleTalents)

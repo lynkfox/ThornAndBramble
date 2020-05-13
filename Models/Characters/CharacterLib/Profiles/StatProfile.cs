@@ -7,9 +7,6 @@ namespace CharacterLib
     public class StatProfile
     {
 
-
-
-
         public string Name { get; set; } = "DefaultCharacter";
         public string Description { get; set; } = "This Character Object Has No Description Set";
         public int HealthCurrent { get; set; } = 100;
