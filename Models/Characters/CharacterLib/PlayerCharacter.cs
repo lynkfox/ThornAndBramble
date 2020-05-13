@@ -15,7 +15,6 @@ namespace CharacterLib
         public int InvestedMoney { get; set; } = 0;
         public List<Talent> InvestedTalents { get; set; } = new List<Talent>();
 
-
         private List<Talent> ApprovedTalents=null;
 
         public PlayerCharacter() : base()
