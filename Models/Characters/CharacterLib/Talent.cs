@@ -15,8 +15,8 @@ namespace CharacterLib
         public int[] UpgradeCostProgression { get; set; }
         public string Description { get; set; }
 
-        
-        public Talent() : this(new int[]{5,10,15,20,25})
+
+        public Talent() : this(new TalentProfile())
         {
 
         }
@@ -30,17 +30,14 @@ namespace CharacterLib
             this.UpgradeCostProgression = profile.CostProgression;
             this.Description = profile.Description;
         }
-        public Talent(int[] cost) : this("DefaultTalent", cost)
+        public Talent(int[] costProgression) : this(new TalentProfile())
         {
-            Description = "This is a Default Talent";
+            this.UpgradeCostProgression = costProgression;
         }
 
-        public Talent(string name, int[] cost)
+        public Talent(string name, int[] cost) : this(new TalentProfile())
         {
-            TotalCost = 0;
             Name = name;
-            CurrentLevel = 0;
-            LevelCap = 5;
             UpgradeCostProgression = cost;
         }
 
