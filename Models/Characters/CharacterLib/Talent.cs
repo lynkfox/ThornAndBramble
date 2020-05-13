@@ -10,6 +10,8 @@ namespace CharacterLib
         public string Name { get; set; }
         public int Cost { get; set; }
         public int Level { get; set; }
+        public int LevelCap { get; set; }
+        public int[] UpgradeCostProgression { get; set; }
         public string Description { get; set; }
 
         public Talent() : this(5)
@@ -26,6 +28,8 @@ namespace CharacterLib
             Cost = cost;
             Name = name;
             Level = 1;
+            LevelCap = 5;
+            UpgradeCostProgression = new int[]{ 5, 10, 15, 20, 25};
         }
 
         public void LevelUp()
