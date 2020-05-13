@@ -2,23 +2,23 @@
 
 namespace CharacterLib
 {
-    public class MonsterCharacter : CharacterBase
+    public class Monster : Character
     {
         //Character Stats
         public int Level { get; set; }
 
 
-        public MonsterCharacter() : this(new StatProfile(), 1)
+        public Monster() : this(new StatProfile(), 1)
         {
 
         }
 
-        public MonsterCharacter(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, 1)
+        public Monster(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, 1)
         {
             this.CharacterStat.Name = monsterName;
         }
 
-        public MonsterCharacter(StatProfile baseMonsterStats, int startingLevel) : base(baseMonsterStats)
+        public Monster(StatProfile baseMonsterStats, int startingLevel) : base(baseMonsterStats)
         {
             this.Level = startingLevel;
             this.IncreaseLevel(startingLevel-1);

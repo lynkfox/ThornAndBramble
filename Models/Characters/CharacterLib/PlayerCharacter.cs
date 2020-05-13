@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CharacterLib
 {
-    public class PlayerCharacter : CharacterBase
+    public class Player : Character
     {
         /* Money is in reference, as of this comment (11/16/19) to refer to Chroma, which is used to both buy
          * items and to invest in Talents
@@ -17,12 +17,12 @@ namespace CharacterLib
 
         private List<Talent> ApprovedTalents=null;
 
-        public PlayerCharacter() : base()
+        public Player() : base()
         {
 
         }
 
-        public PlayerCharacter(string characterName) : this()
+        public Player(string characterName) : this()
         {
             this.CharacterStat.Name = characterName;
         }
@@ -57,11 +57,11 @@ namespace CharacterLib
 
             if(!ApprovedTalents.Contains(potentialTalent))
             {
-                throw new PlayerDoesNotHaveTalent(potentialTalent.Name);
+                throw new PlayerDoesNotHaveTalent(potentialTalent.Profile.Name);
             }
             else if(PlayerAlreadyHaveTalent(potentialTalent))
             {
-                playersTalent = InvestedTalents.Where(x => x.Name == potentialTalent.Name).First();
+                playersTalent = InvestedTalents.Where(x => x.Profile.Name == potentialTalent.Profile.Name).First();
 
             }
             else
@@ -70,13 +70,13 @@ namespace CharacterLib
             }
 
 
-            if(PlayerCanAffordCost(playersTalent.CostsAtLevel(playersTalent.CurrentLevel+1)))
+            if(PlayerCanAffordCost(playersTalent.CostsAtLevel(playersTalent.Profile.CurrentLevel +1)))
             {
                 AddNewTalentOrIncreaseLevelOfExistingTalent(potentialTalent);
             }
             else
             {
-                throw new NotEnoughMoneyToInvest(potentialTalent.Name + " costs " + potentialTalent.CostsAtLevel(playersTalent.CurrentLevel+1));
+                throw new NotEnoughMoneyToInvest(potentialTalent.Profile.Name + " costs " + potentialTalent.CostsAtLevel(playersTalent.Profile.CurrentLevel +1));
             }
             
         }
@@ -98,8 +98,8 @@ namespace CharacterLib
                 InvestedTalents.Add(newTalent);
             }
 
-            InvestedTalents.Where(x => x.Name == newTalent.Name).First().LevelUp();
-            InvestMoney(newTalent.CostsAtLevel(newTalent.CurrentLevel));
+            InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First().LevelUp();
+            InvestMoney(newTalent.CostsAtLevel(newTalent.Profile.CurrentLevel));
         }
 
         public int NumberOfTalents()
@@ -109,9 +109,9 @@ namespace CharacterLib
 
         public int TalentLevel(string talentName)
         {
-            Talent specificTalent = InvestedTalents.Where(x => x.Name == talentName).First();
+            Talent specificTalent = InvestedTalents.Where(x => x.Profile.Name == talentName).First();
 
-            return specificTalent.CurrentLevel;
+            return specificTalent.Profile.CurrentLevel;
         }
 
         public void SetupTalents(List<Talent> possibleTalents)
@@ -128,9 +128,9 @@ namespace CharacterLib
         {
             if(PlayerAlreadyHaveTalent(talentToRemove))
             {
-                var playersTalent = InvestedTalents.Where(x => x.Name == talentToRemove.Name).First();
+                var playersTalent = InvestedTalents.Where(x => x.Profile.Name == talentToRemove.Profile.Name).First();
 
-                InvestMoney(-playersTalent.CostsAtLevel(playersTalent.CurrentLevel));
+                InvestMoney(-playersTalent.CostsAtLevel(playersTalent.Profile.CurrentLevel));
                 playersTalent.LevelDown();
             }
             else

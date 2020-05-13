@@ -8,12 +8,7 @@ namespace CharacterLib
     public class Talent
     {
 
-        public string Name { get; set; }
-        public int TotalCost { get; set; }
-        public int CurrentLevel { get; set; }
-        public int LevelCap { get; set; }
-        public int[] UpgradeCostProgression { get; set; }
-        public string Description { get; set; }
+        public TalentProfile Profile { get; set; }
 
 
         public Talent() : this(new TalentProfile())
@@ -23,45 +18,40 @@ namespace CharacterLib
         
         public Talent(TalentProfile profile)
         {
-            this.Name = profile.Name;
-            this.TotalCost = 0;
-            this.CurrentLevel = 0;
-            this.LevelCap = profile.LevelCap;
-            this.UpgradeCostProgression = profile.CostProgression;
-            this.Description = profile.Description;
+            this.Profile = profile;
         }
         public Talent(int[] costProgression) : this(new TalentProfile())
         {
-            this.UpgradeCostProgression = costProgression;
+            this.Profile.CostProgression = costProgression;
         }
 
         public Talent(string name, int[] cost) : this(new TalentProfile())
         {
-            Name = name;
-            UpgradeCostProgression = cost;
+            this.Profile.Name = name;
+            this.Profile.CostProgression = cost;
         }
 
         public void LevelUp()
         {
-            
-            this.CurrentLevel++;
-            TotalCost += UpgradeCostProgression[CurrentLevel-1];
+
+            this.Profile.CurrentLevel++;
+            this.Profile.TotalCost += this.Profile.CostProgression[this.Profile.CurrentLevel -1];
         }
 
         public void LevelDown()
         {
-            this.CurrentLevel--;
+            this.Profile.CurrentLevel--;
             
 
-            if (this.CurrentLevel <= 0)
+            if (this.Profile.CurrentLevel <= 0)
             {
-                this.CurrentLevel = 0;
-                this.TotalCost = 0;
+                this.Profile.CurrentLevel = 0;
+                this.Profile.TotalCost = 0;
             }
             else
             {
                 //Did you forget Arrays start at 0? xD
-                TotalCost -= UpgradeCostProgression[CurrentLevel]; 
+                this.Profile.TotalCost -= this.Profile.CostProgression[this.Profile.CurrentLevel]; 
             }
         }
 
@@ -73,7 +63,7 @@ namespace CharacterLib
             }
             else
             {
-                return UpgradeCostProgression[level - 1];
+                return this.Profile.CostProgression[level - 1];
             }
             
         }

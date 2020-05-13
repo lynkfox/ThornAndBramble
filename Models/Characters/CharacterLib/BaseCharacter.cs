@@ -4,15 +4,15 @@ using System.Text;
 
 namespace CharacterLib
 {
-    public class CharacterBase
+    public class Character
     {
         public StatProfile CharacterStat { get; set; }
 
-        public CharacterBase() : this(new StatProfile())
+        public Character() : this(new StatProfile())
         {
 
         }
-        public CharacterBase(StatProfile baseProfileStats)
+        public Character(StatProfile baseProfileStats)
         {
             CharacterStat = baseProfileStats;
 
