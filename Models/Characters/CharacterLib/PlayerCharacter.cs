@@ -114,7 +114,7 @@ namespace CharacterLib
             var nowInvestedTalent = InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First();
             
 
-            foreach(var increase in nowInvestedTalent.GetStatIncreaseFor(nowInvestedTalent.Profile.CurrentLevel))
+            foreach(var increase in nowInvestedTalent.GetStatIncreaseForLevel(nowInvestedTalent.Profile.CurrentLevel))
             {
                 AddStatIncreaseToCharacterAndRecords(increase);
             }

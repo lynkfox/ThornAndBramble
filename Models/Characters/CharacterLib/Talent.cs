@@ -34,8 +34,17 @@ namespace CharacterLib
         public void LevelUp()
         {
 
-            this.Profile.CurrentLevel++;
-            this.Profile.TotalCost += this.Profile.CostProgression[this.Profile.CurrentLevel -1];
+            
+            if(this.Profile.CurrentLevel < this.Profile.LevelCap)
+            {
+                this.Profile.CurrentLevel++;
+                this.Profile.TotalCost += this.Profile.CostProgression[this.Profile.CurrentLevel - 1];
+            }
+            else
+            {
+                throw new TalentCannotLevelUpAboveLevelCap(this.Profile.Name + " has a max level of " + this.Profile.LevelCap);
+            }
+            
         }
 
         public void LevelDown()
@@ -68,7 +77,7 @@ namespace CharacterLib
             
         }
 
-        public List<StatIncrease> GetStatIncreaseFor(int level)
+        public List<StatIncrease> GetStatIncreaseForLevel(int level)
         {
             List<StatIncrease> statsToIncrease = new List<StatIncrease>();
             foreach(var item in Profile.StatIncreases)

@@ -37,3 +37,15 @@ public class TalentDoesNotHaveACostAtLevelZero : Exception
     {
     }
 }
+
+public class TalentCannotLevelUpAboveLevelCap : Exception
+{
+    public TalentCannotLevelUpAboveLevelCap()
+    {
+    }
+
+    public TalentCannotLevelUpAboveLevelCap(string message)
+        : base(message)
+    {
+    }
+}
