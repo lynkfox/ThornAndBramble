@@ -59,6 +59,7 @@ namespace CharacterLib
         public Character(StatProfile baseProfileStats)
         {
             CharacterStat = baseProfileStats;
+            TotalIncreasesToStats = new StatProfile();
             statIncreases = new List<StatIncrease>();
             
         }
@@ -69,27 +70,26 @@ namespace CharacterLib
             double baseValue;
             double increaseByValue;
 
-            PropertyInfo baseProperty = this.CharacterStat.GetType().GetProperty(stat);
-            PropertyInfo increaseProperty = this.statIncreases.GetType().GetProperty(stat);
+            PropertyInfo propertyToCheck = this.CharacterStat.GetType().GetProperty(stat);
 
-            if (baseProperty is null || baseProperty.GetValue(CharacterStat) is null)
+            if (propertyToCheck is null || propertyToCheck.GetValue(CharacterStat) is null)
             {
                 baseValue = 0;
             }
             else
             {
-                baseValue = (double)baseProperty.GetValue(CharacterStat);
+                baseValue = (double)propertyToCheck.GetValue(CharacterStat);
             }
 
 
 
-            if (increaseProperty is null || increaseProperty.GetValue(TotalIncreasesToStats) == default)
+            if (propertyToCheck is null || propertyToCheck.GetValue(TotalIncreasesToStats) == default)
             {
                 increaseByValue = 0;
             }
             else
             {
-               increaseByValue = (double)increaseProperty.GetValue(TotalIncreasesToStats);
+               increaseByValue = (double)propertyToCheck.GetValue(TotalIncreasesToStats);
             }
                 
             return baseValue + increaseByValue;
