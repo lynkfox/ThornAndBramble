@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<!--Talent Profiles-->
+<Talents>
+  <talent type="player">
+    <name>Test-Talent</name>
+    <description>This is a basic player Talent</description>
+    <currentLevel>0</currentLevel>
+    <levelCap>3</levelCap>
+  </talent>
+</Talents>
