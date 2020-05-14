@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using CharacterLib.Structures;
 
@@ -58,9 +59,43 @@ namespace CharacterLib
         public Character(StatProfile baseProfileStats)
         {
             CharacterStat = baseProfileStats;
+            statIncreases = new List<StatIncrease>();
             
         }
 
+        public double GetTotalStat(string stat)
+        {
+
+            double baseValue;
+            double increaseByValue;
+
+            PropertyInfo baseProperty = this.CharacterStat.GetType().GetProperty(stat);
+            PropertyInfo increaseProperty = this.statIncreases.GetType().GetProperty(stat);
+
+            if (baseProperty is null || baseProperty.GetValue(CharacterStat) is null)
+            {
+                baseValue = 0;
+            }
+            else
+            {
+                baseValue = (double)baseProperty.GetValue(CharacterStat);
+            }
+
+
+
+            if (increaseProperty is null || increaseProperty.GetValue(TotalIncreasesToStats) == default)
+            {
+                increaseByValue = 0;
+            }
+            else
+            {
+               increaseByValue = (double)increaseProperty.GetValue(TotalIncreasesToStats);
+            }
+                
+            return baseValue + increaseByValue;
+            
+            
+        }
 
         public void TakeDamage(int damage)
         {

@@ -104,10 +104,15 @@ namespace CharacterLib
                 InvestedTalents.Add(newTalent);
             }
 
+            /*Reference thing. Don't need the actual Talent stored in the InvestedTalents list to pull the 
+             * stat increases and putting nowInvestedTalent back into the list is a waste of time
+             * 
+             * todo - maybe figure out how to store nowInvestedTalent as a pointer to the list item
+             */
+            InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First().LevelUp();
 
-            
             var nowInvestedTalent = InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First();
-            nowInvestedTalent.LevelUp();
+            
 
             foreach(var increase in nowInvestedTalent.GetStatIncreaseFor(nowInvestedTalent.Profile.CurrentLevel))
             {
@@ -133,8 +138,6 @@ namespace CharacterLib
                 //Error Handling for StatNotFound
             }
             
-            
-            throw new NotImplementedException();
         }
 
         public int NumberOfTalents()
