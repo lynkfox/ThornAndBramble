@@ -9,9 +9,9 @@ namespace CharacterLib
         public int Level { get; set; }
 
 
-        public Monster() : this(new StatProfile(), 1)
+        public Monster() : base()
         {
-
+            Level = 1;
         }
 
         public Monster(string monsterName, StatProfile statProfile, int startingLevel) : this(statProfile, startingLevel)

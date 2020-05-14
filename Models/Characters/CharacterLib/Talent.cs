@@ -67,5 +67,22 @@ namespace CharacterLib
             }
             
         }
+
+        public List<StatIncrease> GetStatIncreaseFor(int level)
+        {
+            List<StatIncrease> statsToIncrease = new List<StatIncrease>();
+            foreach(var item in Profile.StatIncreases)
+            {
+                StatIncrease individualIncrease = new StatIncrease();
+                individualIncrease.Source = this;
+                individualIncrease.SourceName = this.Profile.Name + "-lvl-"+level;
+                individualIncrease.StatIncreased = item.Key;
+                individualIncrease.IncreasedBy = item.Value[level - 1];
+
+                statsToIncrease.Add(individualIncrease);
+            }
+
+            return statsToIncrease;
+        }
     }
 }

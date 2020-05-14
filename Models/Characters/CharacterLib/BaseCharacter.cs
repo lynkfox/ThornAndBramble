@@ -9,15 +9,57 @@ namespace CharacterLib
     {
         public StatProfile CharacterStat { get; set; }
 
-        public Character() : this(new StatProfile())
-        {
+        public StatProfile TotalIncreasesToStats { get; set; }
 
+        private protected List<StatIncrease> statIncreases;
+
+        public List<StatIncrease> StatIncrease
+        {
+            get { return statIncreases; }
         }
+        public Character() : this(
+            new StatProfile()
+            {
+                Name = "DefaultCharacter",
+                Description = "This Character Object Has No Description Set",
+                HealthCurrent = 100,
+                HealthMax = 100,
+                EnergyCurrent = 50,
+                EnergyMax = 50,
+                AttackPower = 10,
+                CritChance = .1,
+                CritMultiplier = 1.5,
+                DodgeChance = .3,
+                MovementRate = 5,
+                Initiative = 10,
+                AttackList = new List<AttackProfile>()
+                    {
+                        new AttackProfile()
+                        {
+                            Name = "Strike",
+                            HitChance = .75,
+                            BaseDamage = 5
+                        }
+                    },
+                HealthPercentageGrowthPerLevel = .1,
+                EnergyPercentageGrowthPerLevel = .1,
+                AttackPowerPercentageGrowthPerLevel = .1,
+                CritChancePercentageGrowthPerLevel = .01,
+                CritMultiplierPercentageGrowthPerLevel = 0,
+                DodgeChancePercentageGrowthPerLevel = .05,
+                InitiativePercentageGrowthPerLevel = .1
+            })
+        {
+            //no body
+        }
+
+
+
         public Character(StatProfile baseProfileStats)
         {
             CharacterStat = baseProfileStats;
-
-    }
+            
+        }
 
 
         public void TakeDamage(int damage)

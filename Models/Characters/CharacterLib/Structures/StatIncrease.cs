@@ -9,5 +9,6 @@ namespace CharacterLib.Structures
         public string StatIncreased { get; set; }
         public double IncreasedBy { get; set; }
         public object Source { get; set; }
+        public string SourceName { get; set; }
     }
 }

@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using CharacterLib.Structures;
 
 namespace CharacterLib
 {
     public class Player : Character
     {
-        /* Money is in reference, as of this comment (11/16/19) to refer to Chroma, which is used to both buy
-         * items and to invest in Talents
+        /* Money is in reference to Chroma, which is used to both buy
+         * items and to invest in Talents, as well as invest in combining weapon parts and character parts.
          */
 
         public int Money { get; set; } = 0;
         public int InvestedMoney { get; set; } = 0;
 
-        public readonly Dictionary<string,double> StatIncreases= new Dictionary<string,double>();
 
-        public readonly List<Talent> InvestedTalents  = new List<Talent>();
+        public List<Talent> InvestedTalents { get; set; } = new List<Talent>();
         
         private List<Talent> ApprovedTalents=null;
 
@@ -62,7 +63,7 @@ namespace CharacterLib
 
             if(!ApprovedTalents.Contains(potentialTalent))
             {
-                throw new PlayerDoesNotHaveTalent(potentialTalent.Profile.Name);
+                throw new PlayerDoesNotHaveTalent(potentialTalent.Profile.Name + " is not an approved talent for " + this.CharacterStat.Name);
             }
             else if(PlayerAlreadyHaveTalent(potentialTalent))
             {
@@ -103,8 +104,37 @@ namespace CharacterLib
                 InvestedTalents.Add(newTalent);
             }
 
-            InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First().LevelUp();
+
+            
+            var nowInvestedTalent = InvestedTalents.Where(x => x.Profile.Name == newTalent.Profile.Name).First();
+            nowInvestedTalent.LevelUp();
+
+            foreach(var increase in nowInvestedTalent.GetStatIncreaseFor(nowInvestedTalent.Profile.CurrentLevel))
+            {
+                AddStatIncreaseToCharacterAndRecords(increase);
+            }
+
             InvestMoney(newTalent.CostsAtLevel(newTalent.Profile.CurrentLevel));
+
+            
+        }
+
+        private void AddStatIncreaseToCharacterAndRecords(StatIncrease increase)
+        {
+            statIncreases.Add(increase);
+
+            try
+            {
+                PropertyInfo stat = TotalIncreasesToStats.GetType().GetProperty(increase.StatIncreased);
+                stat.SetValue(TotalIncreasesToStats, increase.IncreasedBy, null);
+            }
+            catch (NullReferenceException e)
+            {
+                //Error Handling for StatNotFound
+            }
+            
+            
+            throw new NotImplementedException();
         }
 
         public int NumberOfTalents()
