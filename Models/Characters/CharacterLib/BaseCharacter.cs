@@ -31,6 +31,7 @@ namespace CharacterLib
                 CritChance = .1,
                 CritMultiplier = 1.5,
                 DodgeChance = .3,
+                BaseToHitBonus = 0,
                 MovementRate = 5,
                 Initiative = 10,
                 AttackList = new List<AttackProfile>()

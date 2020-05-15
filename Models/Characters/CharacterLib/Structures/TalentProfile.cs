@@ -6,6 +6,7 @@ namespace CharacterLib.Structures
 {
     public class TalentProfile
     {
+        
         public string Name { get; set; } = "GenericTalent";
         public string Description { get; set; } = "This Talent does not have a proper entry.";
         public int CurrentLevel { get; set; } = 0;

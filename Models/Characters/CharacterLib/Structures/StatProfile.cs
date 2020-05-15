@@ -22,6 +22,7 @@ namespace CharacterLib.Structures
         public double DodgeChance { get; set; }
         public double MovementRate { get; set; }
         public double Initiative { get; set; }
+        public double BaseToHitBonus { get; set; }
         public List<AttackProfile> AttackList { get; set; }
 
         //Level Gain Values

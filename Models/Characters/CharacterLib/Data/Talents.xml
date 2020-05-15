@@ -1,11 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-
-<!--Talent Profiles-->
-<Talents>
-  <talent type="player">
-    <name>Test-Talent</name>
-    <description>This is a basic player Talent</description>
-    <currentLevel>0</currentLevel>
-    <levelCap>3</levelCap>
-  </talent>
-</Talents>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ListOfTalentProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TalentProfile>
+    <Name>Good Vitality</Name>
+    <Description>Raise your Health by 5 per level and your energy by 2.</Description>
+    <LevelCap>5</LevelCap>
+    <!-- Cost Progression is how much each level of the talent costs, 
+    independant of the previous levels. Make Sure there is the same number of LevelX attributes as Level Cap!-->
+    <CostProgression Level1 ="5" Level2 ="5" Level3="5" Level4="5" Level5="5"/>
+    
+    <!--Each stat increased by this talent is itss own Key, with the Values of that key being the various levels-->
+    <StatIncreases>
+      <Increase Stat="HealthMax" Level1 ="5" Level2 ="5" Level3="5" Level4="5" Level5="5"/>
+      <Increase Stat="EnergyMax" Level1 ="2" Level2 ="2" Level3="2" Level4="5" Level5="2"/>
+    </StatIncreases>
+  </TalentProfile>
+  <TalentProfile>
+    <Name>Modest Attack</Name>
+    <Description>Gain 2 attack power per level.</Description>
+    <LevelCap>3</LevelCap>
+    <CostProgression Level1 ="5" Level2 ="5" Level3="5"/>
+    <StatIncreases>
+      <Increase Stat="AttackPower" Level1 ="2" Level2 ="2" Level3="2"/>
+    </StatIncreases>
+  </TalentProfile>
+  <TalentProfile>
+    <Name>Duck Dodge Drop and Duck</Name>
+    <Description>Gain Dodge chance and to hit</Description>
+    <LevelCap>1</LevelCap>
+    <CostProgression Level1 ="25"/>
+    <StatIncreases>
+      <Increase Stat="DodgeChance" Level1 =".2"/>
+      <Increase Stat="BaseToHit" Level1 =".2"/>
+      <Increase Stat="CritChance" Level1 =".2"/>
+    </StatIncreases>
+  </TalentProfile>
+</ListOfTalentProfile>
