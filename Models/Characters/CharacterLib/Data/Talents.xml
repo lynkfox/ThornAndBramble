@@ -1,32 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ListOfTalentProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <TalentProfile>
-    <Name>Good Vitality</Name>
-    <Description>Raise your Health by 5 per level and your energy by 2.</Description>
-    <LevelCap>5</LevelCap>
-    <!-- Cost Progression is how much each level of the talent costs, 
+
+<!-- Cost Progression is how much each level of the talent costs, 
     independant of the previous levels. Make Sure there is the same number of LevelX attributes as Level Cap!-->
+
+<!--Each stat increased by this talent is listed as an Increase. Make sure there are the same number of LevelX as the Level Cap!-->
+
+<ListOfTalentProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TalentProfile Name="Good Vitality" Description ="Raise your Health by 5 per level and your energy by 2." LevelCap ="5">
     <CostProgression Level1 ="5" Level2 ="5" Level3="5" Level4="5" Level5="5"/>
-    
-    <!--Each stat increased by this talent is itss own Key, with the Values of that key being the various levels-->
     <StatIncreases>
       <Increase Stat="HealthMax" Level1 ="5" Level2 ="5" Level3="5" Level4="5" Level5="5"/>
       <Increase Stat="EnergyMax" Level1 ="2" Level2 ="2" Level3="2" Level4="5" Level5="2"/>
     </StatIncreases>
   </TalentProfile>
-  <TalentProfile>
-    <Name>Modest Attack</Name>
-    <Description>Gain 2 attack power per level.</Description>
-    <LevelCap>3</LevelCap>
+  <TalentProfile Name ="Modest Attack" Description ="Gain 2 AttackPower Per Level" LevelCap ="3">
     <CostProgression Level1 ="5" Level2 ="5" Level3="5"/>
     <StatIncreases>
       <Increase Stat="AttackPower" Level1 ="2" Level2 ="2" Level3="2"/>
     </StatIncreases>
   </TalentProfile>
-  <TalentProfile>
-    <Name>Duck Dodge Drop and Duck</Name>
-    <Description>Gain Dodge chance and to hit</Description>
-    <LevelCap>1</LevelCap>
+  <TalentProfile Name ="Duck Dodge Drop and Duck" Description ="Gain Dodge chance and to hit" LevelCap ="1">
     <CostProgression Level1 ="25"/>
     <StatIncreases>
       <Increase Stat="DodgeChance" Level1 =".2"/>

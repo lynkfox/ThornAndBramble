@@ -26,9 +26,9 @@ namespace CharacterLib
                 {
                     TalentProfile profileToAdd = new TalentProfile();
 
-                    profileToAdd.Name = talentProfileNode.Element("Name").Value;
-                    profileToAdd.Description = talentProfileNode.Element("Description").Value;
-                    profileToAdd.LevelCap = int.Parse(talentProfileNode.Element("LevelCap").Value);
+                    profileToAdd.Name = talentProfileNode.Attribute("Name").Value;
+                    profileToAdd.Description = talentProfileNode.Attribute("Description").Value;
+                    profileToAdd.LevelCap = int.Parse(talentProfileNode.Attribute("LevelCap").Value);
                     profileToAdd.TotalCost = 0;
                     profileToAdd.CurrentLevel = 0;
 
