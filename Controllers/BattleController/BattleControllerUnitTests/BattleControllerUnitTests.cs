@@ -8,16 +8,24 @@ namespace BattleControllerUnitTests
     public class BattleControllerUnitTests
     {
         
-        Monster genericMonster = new Monster();
-        Player player = new Player("Player");
+        
 
+        public Battlefield Setup()
+        {
+            Monster genericMonster = new Monster();
+            Player player = new Player("Player");
+            player.CharacterStat.Initiative = 4;
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnMonster(genericMonster);
+            testBattle.SpawnPlayer(player);
 
+            return testBattle;
+        }
 
         [TestMethod]
         public void MonstersCanBeAddedToBatlefield()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnMonster(genericMonster);
+            Battlefield testBattle = Setup();
             int expectedMonsterCount = 1;
 
             Assert.AreEqual(expectedMonsterCount, testBattle.MonsterCount);
@@ -26,8 +34,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void PlayersCanBeAddedToBattlefield()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
+            Battlefield testBattle = Setup();
             int expectedPlayerCount = 1;
 
             Assert.AreEqual(expectedPlayerCount, testBattle.PlayerCount);
@@ -36,11 +43,10 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void InitiativeNextToActCanBeCalled()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
+            Battlefield testBattle = Setup();
             testBattle.AssignInitiativeOrder();
 
-            string expectedName = "Player";
+            string expectedName = "DefaultCharacter";
 
             Assert.AreEqual(expectedName, testBattle.NextToAct().CharacterStat.Name);
         }
@@ -49,12 +55,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void InitiativeOrderCanBeArranged()
         {
-            Player testPlayer = new Player("Player");
-            testPlayer.CharacterStat.Initiative = 4;
-
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(testPlayer);
-            testBattle.SpawnMonster(genericMonster);
+            Battlefield testBattle = Setup();
 
             string actualFirstTurnName = "DefaultCharacter";
 
@@ -67,9 +68,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void ToHitChanceCanBeCalculated()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
-            testBattle.SpawnMonster(genericMonster);
+            Battlefield testBattle = Setup();
 
             double expectedHitChance = .45; // Currently just Attacker BaseToHit + skill AttackChance - Defender DodgeChance
 
@@ -81,8 +80,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void HealthCanBeCalled()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
+            Battlefield testBattle = Setup();
 
             int expectedHealth = 100;
 
@@ -92,9 +90,8 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void AttackThatIsASuccessCanDoDamage()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
-            
+            Battlefield testBattle = Setup();
+
 
             int expectedCurrentHealth = 95;
 
@@ -106,8 +103,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void StatOfAnyKindCanBeRetrieved()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
+            Battlefield testBattle = Setup();
 
             double expectedAttackPower = 10;
             double expectedCritChance = .1;
@@ -119,12 +115,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void NextRoundAdvancesInitiatveToNextCharacterInInitiativeOrder()
         {
-            Battlefield testBattle = new Battlefield();
-            Player testPlayer = new Player("Player");
-            testPlayer.CharacterStat.Initiative = 4;
-
-            testBattle.SpawnPlayer(testPlayer);
-            testBattle.SpawnMonster(genericMonster);
+            Battlefield testBattle = Setup();
 
             testBattle.NewRound();
 
@@ -140,12 +131,10 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void NextTurnWhenOutOfCharactersResetsToNewRound()
         {
-            Battlefield testBattle = new Battlefield();
-            Player testPlayer = new Player("Player");
-            testPlayer.CharacterStat.Initiative = 4;
+            Battlefield testBattle = Setup();
 
-            testBattle.SpawnPlayer(testPlayer);
-            testBattle.SpawnMonster(genericMonster);
+
+            Player testPlayer = new Player("Player");
 
             testBattle.NewRound();
 
@@ -162,9 +151,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void AttackReducesHealthBelow0RemovesCharacterFromBattlefield()
         {
-            Battlefield testBattle = new Battlefield();
-            testBattle.SpawnPlayer(player);
-            testBattle.SpawnMonster(genericMonster);
+            Battlefield testBattle = Setup();
 
             testBattle.NewRound();
 
@@ -180,16 +167,12 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void DeadCharactersAreSkippedInInitiatveOrder()
         {
-            Battlefield testBattle = new Battlefield();
-            Player testPlayer = new Player("Player");
-            testPlayer.CharacterStat.Initiative = 4;
+            Battlefield testBattle = Setup();
 
             Player testPlayer2 = new Player("Player2");
             testPlayer2.CharacterStat.Initiative = 11;
 
-            testBattle.SpawnPlayer(testPlayer);
             testBattle.SpawnPlayer(testPlayer2);
-            testBattle.SpawnMonster(genericMonster);
 
             testBattle.NewRound();
 
@@ -200,6 +183,14 @@ namespace BattleControllerUnitTests
             string expectedNextToActName = "Player";
 
             Assert.AreEqual(expectedNextToActName, testBattle.NextToAct().CharacterStat.Name);
+        }
+
+        [TestMethod]
+        public void AttacksThatHitDoDamageThatmissDoNone()
+        {
+            //not a fan of If/Else in testing but with random numbers...
+
+
         }
     }
 }

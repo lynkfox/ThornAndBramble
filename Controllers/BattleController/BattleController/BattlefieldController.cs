@@ -175,12 +175,5 @@ namespace BattleController
                 deadCharacters.Add(attackedCharacter);
             }
         }
-
-
-
-
-        
-
-        
     }
 }
