@@ -198,22 +198,13 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void AttacksWithAttackPowerDoMoreThanBaseDamage()
         {
-            //not a fan of If/Else in testing but with random numbers...
 
             Battlefield testBattle = Setup();
+            
+            int expectedDamage = 15;
 
-            bool attackResult = testBattle.Attack("Player", "Strike", "DefaultCharacter");
-
-            //if(attackResult)
-            //{
-                int expectedHealth = 85;
-                Assert.AreEqual(expectedHealth, testBattle.HealthOf("DefaultCharacter"));
-            //}else
-            //{
-             //   int expectedHealth = 100;
-             //   Assert.AreEqual(expectedHealth, testBattle.HealthOf("DefaultCharacter"));
-            //}
-
+            Assert.AreEqual(expectedDamage, testBattle.CalculateTotalDamage("Player", "Strike"));
+            
 
         }
         

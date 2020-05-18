@@ -139,19 +139,24 @@ namespace BattleController
         {
            double toHit = CalculateAttackChance(attacker, skill, defender);
 
-            //double dieRoll = Rolld100();
+            double dieRoll = Rolld100();
 
-            //if(dieRoll < toHit)
-            ///{
-                int totalAttackDamage = AttackDamage(attacker, skill) + (int)this.CharacterStat(attacker, "AttackPower");
+            if(dieRoll < toHit)
+            {
+                int totalAttackDamage = CalculateTotalDamage(attacker, skill);
                 SuccessfulAttackDamage(defender, totalAttackDamage);
                 return true;
-            //}
-            //else
-            //{
-                //Fail
-                //return false;
-            //}
+            }
+            else
+            {
+                //fail
+                return false;
+            }
+        }
+
+        public int CalculateTotalDamage(string attacker, string skill)
+        {
+            return AttackDamage(attacker, skill) + (int)this.CharacterStat(attacker, "AttackPower");
         }
 
         private double Rolld100()
