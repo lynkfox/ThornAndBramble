@@ -159,7 +159,7 @@ namespace BattleController
             return AttackDamage(attacker, skill) + (int)this.CharacterStat(attacker, "AttackPower");
         }
 
-        private double Rolld100()
+        public double Rolld100()
         {
             return random.NextDouble();
         }

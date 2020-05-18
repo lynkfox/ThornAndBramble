@@ -207,6 +207,16 @@ namespace BattleControllerUnitTests
             
 
         }
+
+        [TestMethod]
+        public void Rolld100ReturnsADoubleLessThan1AndMoreThan0()
+        {
+            Battlefield testBattle = Setup();
+
+            double number = testBattle.Rolld100();
+
+            Assert.IsTrue(number < 1 && number > 0);
+        }
         
     }
 }
