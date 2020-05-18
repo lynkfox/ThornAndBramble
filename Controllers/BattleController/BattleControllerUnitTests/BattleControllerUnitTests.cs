@@ -196,7 +196,7 @@ namespace BattleControllerUnitTests
 
         
         [TestMethod]
-        public void AttacksThatHitDoDamageThatmissDoNone()
+        public void AttacksWithAttackPowerDoMoreThanBaseDamage()
         {
             //not a fan of If/Else in testing but with random numbers...
 
