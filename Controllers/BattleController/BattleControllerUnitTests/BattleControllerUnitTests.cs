@@ -115,6 +115,48 @@ namespace BattleControllerUnitTests
             Assert.AreEqual(expectedAttackPower, testBattle.CharacterStat("Player", "AttackPower"));
             Assert.AreEqual(expectedCritChance, testBattle.CharacterStat("Player", "CritChance"));
         }
+
+        [TestMethod]
+        public void NextRoundAdvancesInitiatveToNextCharacterInInitiativeOrder()
+        {
+            Battlefield testBattle = new Battlefield();
+            Player testPlayer = new Player("Player");
+            testPlayer.CharacterStat.Initiative = 4;
+
+            testBattle.SpawnPlayer(testPlayer);
+            testBattle.SpawnMonster(genericMonster);
+
+            testBattle.NewRound();
+
+            testBattle.NextTurn();
+
+            string expectedNextToAct = "Player";
+            int expectedInitiative = 4;
+
+            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedInitiative, testBattle.CurrentInitiative);
+        }
         
+        [TestMethod]
+        public void NextTurnWhenOutOfCharactersResetsToNewRound()
+        {
+            Battlefield testBattle = new Battlefield();
+            Player testPlayer = new Player("Player");
+            testPlayer.CharacterStat.Initiative = 4;
+
+            testBattle.SpawnPlayer(testPlayer);
+            testBattle.SpawnMonster(genericMonster);
+
+            testBattle.NewRound();
+
+            testBattle.NextTurn();
+            testBattle.NextTurn();
+
+            string expectedNextToAct = "DefaultCharacter";
+            int expectedInitiative = 10;
+
+            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedInitiative, testBattle.CurrentInitiative);
+        }
     }
 }

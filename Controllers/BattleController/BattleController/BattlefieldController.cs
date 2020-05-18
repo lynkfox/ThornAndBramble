@@ -47,6 +47,13 @@ namespace BattleController
         }
 
 
+        /* Initiative goes from Highest To Lowest - Higher goes first.
+         * 
+         * Each Round is all characters in CharactersOnField acting.
+         * 
+         * Each Turn is the next character in Initiative Order Acting.
+         */
+
         public void AssignInitiativeOrder()
         {
             var initiativeFromHighToLow = CharactersOnField.OrderBy(x => x.CharacterStat.Initiative).ToList();
@@ -60,6 +67,25 @@ namespace BattleController
             return initiativeOrder.Peek();
         }
 
+        //Will eventually contain other Begining Of Turn commands.
+        public void NewRound()
+        {
+            AssignInitiativeOrder();
+            CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
+        }
+
+        public void NextTurn()
+        {
+            initiativeOrder.Pop();
+            if(initiativeOrder.Count == 0)
+            {
+                NewRound();
+            }else
+            {
+                CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
+            }
+            
+        }
 
 
         public double Attack(string attacker, string skill, string defender)
@@ -87,7 +113,11 @@ namespace BattleController
 
 
 
-
+        /* These methods get the various stat information from characters on the field.
+         * 
+         * For this reason Character.CharacterStat.Name Must Be Unique, though DisplayName can be duplicate.
+         * 
+         */
 
 
         private Character Participant(string characterName)
