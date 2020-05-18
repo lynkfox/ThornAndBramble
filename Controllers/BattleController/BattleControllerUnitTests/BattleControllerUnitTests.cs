@@ -194,7 +194,7 @@ namespace BattleControllerUnitTests
             Assert.AreEqual(expectedDamage, testBattle.AttackDamage("Player", "Strike"));
         }
 
-        /*
+        
         [TestMethod]
         public void AttacksThatHitDoDamageThatmissDoNone()
         {
@@ -202,10 +202,20 @@ namespace BattleControllerUnitTests
 
             Battlefield testBattle = Setup();
 
-            testBattle.Attack("Player", "Strike", "DefaultCharacter");
+            bool attackResult = testBattle.Attack("Player", "Strike", "DefaultCharacter");
+
+            //if(attackResult)
+            //{
+                int expectedHealth = 85;
+                Assert.AreEqual(expectedHealth, testBattle.HealthOf("DefaultCharacter"));
+            //}else
+            //{
+             //   int expectedHealth = 100;
+             //   Assert.AreEqual(expectedHealth, testBattle.HealthOf("DefaultCharacter"));
+            //}
 
 
         }
-        */
+        
     }
 }

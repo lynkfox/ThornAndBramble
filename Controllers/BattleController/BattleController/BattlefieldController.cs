@@ -139,24 +139,24 @@ namespace BattleController
         {
            double toHit = CalculateAttackChance(attacker, skill, defender);
 
-            double dieRoll = Rolld100();
+            //double dieRoll = Rolld100();
 
-            if(dieRoll < toHit)
-            {
-                // Successfull Attack (higher To Hit means More Likely)
-                SuccessfulAttackDamage(defender, 5);
+            //if(dieRoll < toHit)
+            ///{
+                int totalAttackDamage = AttackDamage(attacker, skill) + (int)this.CharacterStat(attacker, "AttackPower");
+                SuccessfulAttackDamage(defender, totalAttackDamage);
                 return true;
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 //Fail
-                return false;
-            }
+                //return false;
+            //}
         }
 
         private double Rolld100()
         {
-            return random.Next(0, 101) / 100;
+            return random.NextDouble();
         }
 
         //Overload for easier to read implimentation
@@ -180,6 +180,11 @@ namespace BattleController
             return hitChance - dodgeChance;
         }
 
+        public int AttackDamage(string characterName, string attackName)
+        {
+            return Participant(characterName).AttackDamage(attackName);
+        }
+
         public void SuccessfulAttackDamage(string characterName, int damageTaken)
         {
             Character attackedCharacter = Participant(characterName);
@@ -201,9 +206,6 @@ namespace BattleController
             }
         }
 
-        public int AttackDamage(string characterName, string attackName)
-        {
-            return Participant(characterName).AttackDamage(attackName);
-        }
+        
     }
 }
