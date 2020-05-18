@@ -9,7 +9,9 @@ namespace BattleControllerUnitTests
     {
         
         Monster genericMonster = new Monster();
-        Player player = new Player();
+        Player player = new Player("Player");
+
+
 
         [TestMethod]
         public void MonstersCanBeAddedToBatlefield()
@@ -38,7 +40,7 @@ namespace BattleControllerUnitTests
             testBattle.SpawnPlayer(player);
             testBattle.AssignInitiativeOrder();
 
-            string expectedName = "DefaultCharacter";
+            string expectedName = "Player";
 
             Assert.AreEqual(expectedName, testBattle.NextToAct().CharacterStat.Name);
         }
@@ -47,8 +49,7 @@ namespace BattleControllerUnitTests
         [TestMethod]
         public void InitiativeOrderCanBeArranged()
         {
-            Player testPlayer = new Player();
-            testPlayer.CharacterStat.Name = "Player";
+            Player testPlayer = new Player("Player");
             testPlayer.CharacterStat.Initiative = 4;
 
             Battlefield testBattle = new Battlefield();
