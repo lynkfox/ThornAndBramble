@@ -161,7 +161,7 @@ namespace BattleController
 
         public double Rolld100()
         {
-            return random.NextDouble();
+            return Math.Round(random.NextDouble(),2);
         }
 
         //Overload for easier to read implimentation
