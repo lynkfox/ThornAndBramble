@@ -72,7 +72,7 @@ namespace BattleControllerUnitTests
 
             double expectedHitChance = .45; // Currently just Attacker BaseToHit + skill AttackChance - Defender DodgeChance
 
-            double actualHitChance = testBattle.Attack("Player", "Strike", "DefaultCharacter");
+            double actualHitChance = testBattle.CalculateAttackChance("Player", "Strike", "DefaultCharacter");
 
             Assert.AreEqual(expectedHitChance, actualHitChance);
         }
@@ -186,11 +186,26 @@ namespace BattleControllerUnitTests
         }
 
         [TestMethod]
+        public void AttackDamageCanTakeDameFromCharactersKnownAttacks()
+        {
+            Battlefield testBattle = Setup();
+
+            int expectedDamage = 5;
+            Assert.AreEqual(expectedDamage, testBattle.AttackDamage("Player", "Strike"));
+        }
+
+        /*
+        [TestMethod]
         public void AttacksThatHitDoDamageThatmissDoNone()
         {
             //not a fan of If/Else in testing but with random numbers...
 
+            Battlefield testBattle = Setup();
+
+            testBattle.Attack("Player", "Strike", "DefaultCharacter");
+
 
         }
+        */
     }
 }

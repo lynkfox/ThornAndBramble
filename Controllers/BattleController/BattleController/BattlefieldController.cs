@@ -29,7 +29,7 @@ namespace BattleController
 
         private List<Character> CharactersOnField = new List<Character>();
         
-
+        private Random random = new Random();
 
 
         /*Setup Methods.
@@ -135,7 +135,32 @@ namespace BattleController
          * 
          */
 
-        public double Attack(string attacker, string skill, string defender)
+        public bool Attack(string attacker, string skill, string defender)
+        {
+           double toHit = CalculateAttackChance(attacker, skill, defender);
+
+            double dieRoll = Rolld100();
+
+            if(dieRoll < toHit)
+            {
+                // Successfull Attack (higher To Hit means More Likely)
+                SuccessfulAttackDamage(defender, 5);
+                return true;
+            }
+            else
+            {
+                //Fail
+                return false;
+            }
+        }
+
+        private double Rolld100()
+        {
+            return random.Next(0, 101) / 100;
+        }
+
+        //Overload for easier to read implimentation
+        public double CalculateAttackChance(string attacker, string skill, string defender)
         {
             /*This is simplified but can be changed - if so don't forget to change the unit test values!
              * 
@@ -174,6 +199,11 @@ namespace BattleController
 
                 deadCharacters.Add(attackedCharacter);
             }
+        }
+
+        public int AttackDamage(string characterName, string attackName)
+        {
+            return Participant(characterName).AttackDamage(attackName);
         }
     }
 }
