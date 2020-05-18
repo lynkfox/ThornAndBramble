@@ -158,5 +158,23 @@ namespace BattleControllerUnitTests
             Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().CharacterStat.Name);
             Assert.AreEqual(expectedInitiative, testBattle.CurrentInitiative);
         }
+
+        [TestMethod]
+        public void AttackReducesHealthBelow0RemovesCharacterFromBattlefield()
+        {
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnPlayer(player);
+            testBattle.SpawnMonster(genericMonster);
+
+            testBattle.NewRound();
+
+            testBattle.SuccessfulAttackDamage("Player", 105);
+
+            int expectedPlayerCount = 0;
+            int expectedDeadCharacterCount = 1;
+
+            Assert.AreEqual(expectedPlayerCount, testBattle.PlayerCount);
+            Assert.AreEqual(expectedDeadCharacterCount, testBattle.DeadCharacters.Count);
+        }
     }
 }

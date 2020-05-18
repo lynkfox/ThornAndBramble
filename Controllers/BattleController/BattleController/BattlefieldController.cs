@@ -12,6 +12,14 @@ namespace BattleController
         public int PlayerCount { get; set; }
         public int CurrentInitiative { get; set; }
 
+        private List<Character> deadCharacters = new List<Character>();
+
+        public List<Character> DeadCharacters
+        {
+            get { return deadCharacters; }
+        }
+
+
         private Stack<Character> initiativeOrder;
 
         public Stack<Character> InitiativeOrder
@@ -46,8 +54,37 @@ namespace BattleController
             CharactersOnField.Add(genericCharacter);
         }
 
+        /* Information Methods
+         * 
+         * These methods get the various stat information from characters on the field.
+         * 
+         * For this reason Character.CharacterStat.Name Must Be Unique, though DisplayName can be duplicate.
+         * 
+         */
 
-        /* Initiative goes from Highest To Lowest - Higher goes first.
+
+        private Character Participant(string characterName)
+        {
+            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
+        }
+
+        public int HealthOf(string characterName)
+        {
+            return (int)Participant(characterName).CharacterStat.HealthCurrent;
+        }
+
+
+        public double CharacterStat(string characterName, string statName)
+        {
+            return Participant(characterName).StatsTotalWithBonuses(statName);
+        }
+
+
+
+
+        /* Turn Order/Round Methods
+         * 
+         * Initiative goes from Highest To Lowest - Higher goes first.
          * 
          * Each Round is all characters in CharactersOnField acting.
          * 
@@ -88,6 +125,12 @@ namespace BattleController
         }
 
 
+        /* Combat Methods
+         * 
+         * Including attacks, buffs, debufs, heals
+         * 
+         */
+
         public double Attack(string attacker, string skill, string defender)
         {
             /*This is simplified but can be changed - if so don't forget to change the unit test values!
@@ -108,38 +151,31 @@ namespace BattleController
             return hitChance - dodgeChance;
         }
 
-        
-
-
-
-
-        /* These methods get the various stat information from characters on the field.
-         * 
-         * For this reason Character.CharacterStat.Name Must Be Unique, though DisplayName can be duplicate.
-         * 
-         */
-
-
-        private Character Participant(string characterName)
-        {
-            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
-        }
-
-        public int HealthOf(string characterName)
-        {
-            return (int)Participant(characterName).CharacterStat.HealthCurrent;
-        }
-
         public void SuccessfulAttackDamage(string characterName, int damageTaken)
         {
-            Participant(characterName).TakeDamage(damageTaken);
+            Character attackedCharacter = Participant(characterName);
+            attackedCharacter.TakeDamage(damageTaken);
+
+
+            if(HealthOf(characterName) == 0 )
+            {
+                if(attackedCharacter.GetType() == typeof(Player))
+                {
+                    PlayerCount--;
+                }
+                else if (attackedCharacter.GetType() == typeof(Monster))
+                {
+                    MonsterCount--;
+                }
+                CharactersOnField.Remove(attackedCharacter);
+                deadCharacters.Add(attackedCharacter);
+            }
         }
 
 
-        public double CharacterStat(string characterName, string statName)
-        {
-            return Participant(characterName).StatsTotalWithBonuses(statName);
-        }
+
+
+        
 
         
     }
