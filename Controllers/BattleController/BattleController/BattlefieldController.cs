@@ -111,13 +111,17 @@ namespace BattleController
             CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
         }
 
-        public void NextTurn()
+        public void AdvanceTurn()
         {
             initiativeOrder.Pop();
             if(initiativeOrder.Count == 0)
             {
                 NewRound();
-            }else
+            }else if(deadCharacters.Contains(NextToAct()))
+            {
+                AdvanceTurn();
+
+            } else
             {
                 CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
             }
@@ -167,7 +171,7 @@ namespace BattleController
                 {
                     MonsterCount--;
                 }
-                CharactersOnField.Remove(attackedCharacter);
+
                 deadCharacters.Add(attackedCharacter);
             }
         }

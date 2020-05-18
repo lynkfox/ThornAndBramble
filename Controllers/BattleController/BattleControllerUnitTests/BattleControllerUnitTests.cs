@@ -128,7 +128,7 @@ namespace BattleControllerUnitTests
 
             testBattle.NewRound();
 
-            testBattle.NextTurn();
+            testBattle.AdvanceTurn();
 
             string expectedNextToAct = "Player";
             int expectedInitiative = 4;
@@ -149,8 +149,8 @@ namespace BattleControllerUnitTests
 
             testBattle.NewRound();
 
-            testBattle.NextTurn();
-            testBattle.NextTurn();
+            testBattle.AdvanceTurn();
+            testBattle.AdvanceTurn();
 
             string expectedNextToAct = "DefaultCharacter";
             int expectedInitiative = 10;
@@ -175,6 +175,31 @@ namespace BattleControllerUnitTests
 
             Assert.AreEqual(expectedPlayerCount, testBattle.PlayerCount);
             Assert.AreEqual(expectedDeadCharacterCount, testBattle.DeadCharacters.Count);
+        }
+
+        [TestMethod]
+        public void DeadCharactersAreSkippedInInitiatveOrder()
+        {
+            Battlefield testBattle = new Battlefield();
+            Player testPlayer = new Player("Player");
+            testPlayer.CharacterStat.Initiative = 4;
+
+            Player testPlayer2 = new Player("Player2");
+            testPlayer2.CharacterStat.Initiative = 11;
+
+            testBattle.SpawnPlayer(testPlayer);
+            testBattle.SpawnPlayer(testPlayer2);
+            testBattle.SpawnMonster(genericMonster);
+
+            testBattle.NewRound();
+
+            testBattle.SuccessfulAttackDamage("DefaultCharacter", 9999);
+
+            testBattle.AdvanceTurn();
+
+            string expectedNextToActName = "Player";
+
+            Assert.AreEqual(expectedNextToActName, testBattle.NextToAct().CharacterStat.Name);
         }
     }
 }
