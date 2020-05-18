@@ -142,6 +142,15 @@ namespace CharacterLib
             }
         }
 
+        public void RestoreEnergy(int energyReturned)
+        {
+            CharacterStat.EnergyCurrent += energyReturned;
+            if (CharacterStat.EnergyCurrent > CharacterStat.EnergyMax)
+            {
+                CharacterStat.EnergyCurrent = CharacterStat.EnergyMax;
+            }
+        }
+
         public void UseAction()
         {
             if(this.CharacterStat.ActionsUsed < this.CharacterStat.ActionsPerTurn)
@@ -154,16 +163,10 @@ namespace CharacterLib
             
         }
 
-        public void RestoreEnergy(int energyReturned)
+        public int AttackDamage(string nameOfAttack)
         {
-            CharacterStat.EnergyCurrent += energyReturned;
-            if (CharacterStat.EnergyCurrent > CharacterStat.EnergyMax)
-            {
-                CharacterStat.EnergyCurrent = CharacterStat.EnergyMax;
-            }
+            return this.CharacterStat.OffensiveSkills.Where(x => x.Name == nameOfAttack).First().BaseDamage;
         }
-
-        
 
         public double SkillToHitChance(string nameOfAttack)
         {
