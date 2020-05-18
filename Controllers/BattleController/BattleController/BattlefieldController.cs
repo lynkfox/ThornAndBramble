@@ -51,9 +51,21 @@ namespace BattleController
             initiativeOrder = new Stack<Character>(initiativeFromHighToLow);
         }
 
-        public int GetHealth(string characterName)
+        public int HealthOf(string characterName)
         {
-            return (int)CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First().CharacterStat.HealthCurrent;
+            return (int)Participant(characterName).CharacterStat.HealthCurrent;
+        }
+
+        public void SuccessfulAttackDamage(string characterName, int damageTaken)
+        {
+            Participant(characterName).TakeDamage(damageTaken);
+        }
+
+
+
+        private Character Participant(string characterName)
+        {
+            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
         }
     }
 }

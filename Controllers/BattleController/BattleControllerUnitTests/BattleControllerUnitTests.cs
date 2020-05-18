@@ -86,23 +86,22 @@ namespace BattleControllerUnitTests
 
             int expectedHealth = 100;
 
-            Assert.AreEqual(expectedHealth, testBattle.GetHealth("Player"));
+            Assert.AreEqual(expectedHealth, testBattle.HealthOf("Player"));
         }
-        /*
+        
         [TestMethod]
         public void AttackThatIsASuccessCanDoDamage()
         {
             Battlefield testBattle = new Battlefield();
             testBattle.SpawnPlayer(player);
-            testBattle.SpawnMonster(genericMonster);
             
 
             int expectedCurrentHealth = 95;
 
             testBattle.SuccessfulAttackDamage("Player", 5);
 
-            Assert.AreEqual(expectedCurrentHealth, )
+            Assert.AreEqual(expectedCurrentHealth, testBattle.HealthOf("Player"));
         }
-        */
+        
     }
 }
