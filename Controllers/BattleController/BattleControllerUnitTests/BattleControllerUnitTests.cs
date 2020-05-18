@@ -71,9 +71,9 @@ namespace BattleControllerUnitTests
             testBattle.SpawnPlayer(player);
             testBattle.SpawnMonster(genericMonster);
 
-            double expectedHitChance = .45; //Current Calculations are just HitChance-DodgeChance
+            double expectedHitChance = .45; // Currently just Attacker BaseToHit + skill AttackChance - Defender DodgeChance
 
-            double actualHitChance = testBattle.CalculateAttackChance(player.CharacterStat.AttackList[0], genericMonster.CharacterStat.DodgeChance);
+            double actualHitChance = testBattle.Attack("Player", "Strike", "DefaultCharacter");
 
             Assert.AreEqual(expectedHitChance, actualHitChance);
         }

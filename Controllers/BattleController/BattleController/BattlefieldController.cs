@@ -21,34 +21,78 @@ namespace BattleController
 
         private List<Character> CharactersOnField = new List<Character>();
         
+
+
+
+        /*Setup Methods.
+         * 
+         * Setup the field with these methods. 
+         * 
+         */
         public void SpawnMonster(Monster genericMonster)
         {
-            CharactersOnField.Add(genericMonster);
+            SpawnCharacter(genericMonster);
             MonsterCount++;
         }
 
         public void SpawnPlayer(Player playerCharacter)
         {
-            CharactersOnField.Add(playerCharacter);
+            SpawnCharacter(playerCharacter);
             PlayerCount++;
         }
 
-        public double CalculateAttackChance(AttackProfile attack, double dodgeChance)
+        private void SpawnCharacter(Character genericCharacter)
         {
-            return attack.HitChance - dodgeChance;
+            CharactersOnField.Add(genericCharacter);
         }
 
-        public Character NextToAct()
-        {
-            
-            return initiativeOrder.Peek();
-        }
 
         public void AssignInitiativeOrder()
         {
             var initiativeFromHighToLow = CharactersOnField.OrderBy(x => x.CharacterStat.Initiative).ToList();
 
             initiativeOrder = new Stack<Character>(initiativeFromHighToLow);
+        }
+
+        public Character NextToAct()
+        {
+
+            return initiativeOrder.Peek();
+        }
+
+
+
+        public double Attack(string attacker, string skill, string defender)
+        {
+            /*This is simplified but can be changed - if so don't forget to change the unit test values!
+             * 
+             * Currently Attacker.BaseToHit+Skill.HitChance - Defender.DodgeChance
+             * 
+             * Other ideas?
+             */
+
+            double attackerTotalHitChance = CharacterStat(attacker, "BaseToHit") + Participant(attacker).SkillToHitChance("Strike");
+            double defenderDodgeChance = CharacterStat(defender, "DodgeChance");
+
+            return CalculateAttackChance(attackerTotalHitChance, defenderDodgeChance);
+        }
+
+        private double CalculateAttackChance(double hitChance, double dodgeChance)
+        {
+            return hitChance - dodgeChance;
+        }
+
+        
+
+
+
+
+
+
+
+        private Character Participant(string characterName)
+        {
+            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
         }
 
         public int HealthOf(string characterName)
@@ -62,15 +106,11 @@ namespace BattleController
         }
 
 
-
-        private Character Participant(string characterName)
-        {
-            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
-        }
-
         public double CharacterStat(string characterName, string statName)
         {
-            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First().StatsTotalWithBonuses(statName);
+            return Participant(characterName).StatsTotalWithBonuses(statName);
         }
+
+        
     }
 }
