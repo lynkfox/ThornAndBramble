@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using CharacterLib.Structures;
+using System.Linq;
 
 namespace CharacterLib
 {
@@ -65,7 +66,7 @@ namespace CharacterLib
             
         }
 
-        public double GetTotalStat(string stat)
+        public double StatsTotalWithBonuses(string stat)
         {
 
             double baseValue;
@@ -108,6 +109,8 @@ namespace CharacterLib
             }
         }
 
+        
+
         public void HealDamage(int heal)
         {
             CharacterStat.HealthCurrent += heal;
@@ -135,5 +138,16 @@ namespace CharacterLib
                 CharacterStat.EnergyCurrent = CharacterStat.EnergyMax;
             }
         }
+
+        public double AttackChance(string nameOfAttack)
+        {
+            return this.CharacterStat.AttackList.Where(x => x.Name == nameOfAttack).First().HitChance;
+        }
+
+        public double AttackBaseDamage(string nameOfAttack)
+        {
+            return this.CharacterStat.AttackList.Where(x => x.Name == nameOfAttack).First().BaseDamage;
+        }
     }
+
 }

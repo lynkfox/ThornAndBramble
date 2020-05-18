@@ -67,5 +67,10 @@ namespace BattleController
         {
             return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
         }
+
+        public double CharacterStat(string characterName, string statName)
+        {
+            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First().StatsTotalWithBonuses(statName);
+        }
     }
 }

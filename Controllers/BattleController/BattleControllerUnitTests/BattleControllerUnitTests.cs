@@ -102,6 +102,19 @@ namespace BattleControllerUnitTests
 
             Assert.AreEqual(expectedCurrentHealth, testBattle.HealthOf("Player"));
         }
+
+        [TestMethod]
+        public void StatOfAnyKindCanBeRetrieved()
+        {
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnPlayer(player);
+
+            double expectedAttackPower = 10;
+            double expectedCritChance = .1;
+
+            Assert.AreEqual(expectedAttackPower, testBattle.CharacterStat("Player", "AttackPower"));
+            Assert.AreEqual(expectedCritChance, testBattle.CharacterStat("Player", "CritChance"));
+        }
         
     }
 }
