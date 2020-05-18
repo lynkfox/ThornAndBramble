@@ -8,11 +8,11 @@ namespace BattleControllerUnitTests
     public class BattleControllerUnitTests
     {
         
-        MonsterCharacter genericMonster = new MonsterCharacter();
-        PlayerCharacter player = new PlayerCharacter();
+        Monster genericMonster = new Monster();
+        Player player = new Player();
 
         [TestMethod]
-        public void BattlefieldCanHaveMonstersAddedToIt()
+        public void MonstersCanBeAddedToBatlefield()
         {
             Battlefield testBattle = new Battlefield();
             testBattle.SpawnMonster(genericMonster);
@@ -22,7 +22,7 @@ namespace BattleControllerUnitTests
         }
 
         [TestMethod]
-        public void BattlefieldCanHavePlayersAddedToIt()
+        public void PlayersCanBeAddedToBattlefield()
         {
             Battlefield testBattle = new Battlefield();
             testBattle.SpawnPlayer(player);
@@ -32,7 +32,39 @@ namespace BattleControllerUnitTests
         }
 
         [TestMethod]
-        public void BattlefieldCalculatesHitChanceForAttack()
+        public void InitiativeNextToActCanBeCalled()
+        {
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnPlayer(player);
+            testBattle.AssignInitiativeOrder();
+
+            string expectedName = "DefaultCharacter";
+
+            Assert.AreEqual(expectedName, testBattle.NextToAct().CharacterStat.Name);
+        }
+
+        
+        [TestMethod]
+        public void InitiativeOrderCanBeArranged()
+        {
+            Player testPlayer = new Player();
+            testPlayer.CharacterStat.Name = "Player";
+            testPlayer.CharacterStat.Initiative = 4;
+
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnPlayer(testPlayer);
+            testBattle.SpawnMonster(genericMonster);
+
+            string actualFirstTurnName = "DefaultCharacter";
+
+            testBattle.AssignInitiativeOrder();
+
+            Assert.AreEqual(actualFirstTurnName, testBattle.NextToAct().CharacterStat.Name);
+        }
+        
+
+        [TestMethod]
+        public void ToHitChanceCanBeCalculated()
         {
             Battlefield testBattle = new Battlefield();
             testBattle.SpawnPlayer(player);
@@ -40,9 +72,23 @@ namespace BattleControllerUnitTests
 
             double expectedHitChance = .45; //Current Calculations are just HitChance-DodgeChance
 
-            double actualHitChance = testBattle.CalculateAttackChance(player.AttackList[0], genericMonster.DodgeChance);
+            double actualHitChance = testBattle.CalculateAttackChance(player.CharacterStat.AttackList[0], genericMonster.CharacterStat.DodgeChance);
 
             Assert.AreEqual(expectedHitChance, actualHitChance);
         }
+
+        /*
+        [TestMethod]
+        public void AttackThatIsASuccesCanDoDamage()
+        {
+            Battlefield testBattle = new Battlefield();
+            testBattle.SpawnPlayer(player);
+            testBattle.SpawnMonster(genericMonster);
+
+            int expectedCurrentHealth = 95;
+
+            testBattle.SuccessfulAttackDamage()
+        }
+        */
     }
 }
