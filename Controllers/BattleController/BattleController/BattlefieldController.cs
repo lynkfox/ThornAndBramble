@@ -50,5 +50,10 @@ namespace BattleController
 
             initiativeOrder = new Stack<Character>(initiativeFromHighToLow);
         }
+
+        public int GetHealth(string characterName)
+        {
+            return (int)CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First().CharacterStat.HealthCurrent;
+        }
     }
 }
