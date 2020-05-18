@@ -21,9 +21,11 @@ namespace CharacterLib.Structures
         public double CritMultiplier { get; set; }
         public double DodgeChance { get; set; }
         public double MovementRate { get; set; }
+        public double ActionsPerTurn { get; set; }
+        public double ActionsUsed { get; set; }
         public double Initiative { get; set; }
         public double BaseToHitBonus { get; set; }
-        public List<AttackProfile> AttackList { get; set; }
+        public List<AttackProfile> OffensiveSkills { get; set; }
 
         //Level Gain Values
 

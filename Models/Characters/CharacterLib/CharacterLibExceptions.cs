@@ -49,3 +49,15 @@ public class TalentCannotLevelUpAboveLevelCap : Exception
     {
     }
 }
+
+public class CharacterDoesNotHaveEnoughActionPoint : Exception
+{
+    public CharacterDoesNotHaveEnoughActionPoint()
+    {
+    }
+
+    public CharacterDoesNotHaveEnoughActionPoint(string message)
+        : base(message)
+    {
+    }
+}

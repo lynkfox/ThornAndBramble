@@ -34,8 +34,10 @@ namespace CharacterLib
                 DodgeChance = .3,
                 BaseToHitBonus = 0,
                 MovementRate = 5,
+                ActionsPerTurn = 2,
+                ActionsUsed = 0,
                 Initiative = 10,
-                AttackList = new List<AttackProfile>()
+                OffensiveSkills = new List<AttackProfile>()
                     {
                         new AttackProfile()
                         {
@@ -83,8 +85,6 @@ namespace CharacterLib
                 baseValue = (double)propertyToCheck.GetValue(CharacterStat);
             }
 
-
-
             if (propertyToCheck is null || propertyToCheck.GetValue(TotalIncreasesToStats) == default)
             {
                 increaseByValue = 0;
@@ -93,10 +93,21 @@ namespace CharacterLib
             {
                increaseByValue = (double)propertyToCheck.GetValue(TotalIncreasesToStats);
             }
-                
             return baseValue + increaseByValue;
             
-            
+        }
+
+        /* MVC says that this model should have no idea about how turns work.
+         * 
+         * So this method has no idea when it should be called, it just "Readies" a character.
+         * 
+         * Eventually will be used to set once per turn attacks back to viable, or do automatic begining of turn 
+         * (like gain an extra action point)
+         * 
+         */
+        public void ReadyCharacter()
+        {
+            this.CharacterStat.ActionsUsed = 0;
         }
 
         public void TakeDamage(int damage)
@@ -130,6 +141,19 @@ namespace CharacterLib
                 CharacterStat.EnergyCurrent = 0;
             }
         }
+
+        public void UseAction()
+        {
+            if(this.CharacterStat.ActionsUsed < this.CharacterStat.ActionsPerTurn)
+            {
+                this.CharacterStat.ActionsUsed++;
+            } else
+            {
+                throw new CharacterDoesNotHaveEnoughActionPoint("Already Used" + this.CharacterStat.ActionsUsed + " of " + this.CharacterStat.ActionsPerTurn + " Action Points.");
+            }
+            
+        }
+
         public void RestoreEnergy(int energyReturned)
         {
             CharacterStat.EnergyCurrent += energyReturned;
@@ -139,14 +163,16 @@ namespace CharacterLib
             }
         }
 
-        public double AttackChance(string nameOfAttack)
+        
+
+        public double SkillToHitChance(string nameOfAttack)
         {
-            return this.CharacterStat.AttackList.Where(x => x.Name == nameOfAttack).First().HitChance;
+            return this.CharacterStat.OffensiveSkills.Where(x => x.Name == nameOfAttack).First().HitChance;
         }
 
-        public double AttackBaseDamage(string nameOfAttack)
+        public double SkillBaseDamage(string nameOfAttack)
         {
-            return this.CharacterStat.AttackList.Where(x => x.Name == nameOfAttack).First().BaseDamage;
+            return this.CharacterStat.OffensiveSkills.Where(x => x.Name == nameOfAttack).First().BaseDamage;
         }
     }
 
