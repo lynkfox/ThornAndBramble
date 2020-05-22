@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ActorControllers">
+      <HintPath>..\..\..\Controllers\BattleController\bin\Debug\netcoreapp2.2\ActorControllers.dll</HintPath>
+    </Reference>
+    <Reference Include="BattlefieldController">
+      <HintPath>..\..\..\Controllers\BattleController\bin\Debug\netcoreapp2.2\BattlefieldController.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
