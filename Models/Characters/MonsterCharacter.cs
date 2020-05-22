@@ -26,8 +26,6 @@ namespace CharacterLib
             
         }
 
-        
-
 
 
         public void IncreaseLevel(int increaseLevelBy)

@@ -20,7 +20,6 @@ namespace CharacterLib
             if (File.Exists(path))
             {
 
-                StringBuilder result = new StringBuilder();
                 var allProfiles = XElement.Load(path).Elements("TalentProfile");
                 foreach (XElement talentProfileNode in allProfiles)
                 {
@@ -57,6 +56,61 @@ namespace CharacterLib
                 throw new FileNotFoundException();
             }
             return talents;
+        }
+
+        public static List<Monster> ReadMonster()
+        {
+            List<Monster> monsters = new List<Monster>();
+            string path = Path.Combine(Environment.CurrentDirectory, "Data", "Monsters.xml");
+            if (File.Exists(path))
+            {
+
+                
+                var allProfiles = XElement.Load(path).Elements("MonsterProfile");
+                foreach (XElement monsterProfileNode in allProfiles)
+                {
+                    var statsNode = monsterProfileNode.Element("StartingStats");
+                    var offensiveSkills = monsterProfileNode.Element("OffensiveSkills").Elements();
+                    
+                    StatProfile profileToAdd = new StatProfile()
+                    {
+                        Name = monsterProfileNode.Attribute("Name").Value,
+                        Description = monsterProfileNode.Attribute("Description").Value,
+                        //LowLevel = monsterProfileNode.Attribute("LowestLevel").Value,
+                        //HighLevel = monsterProfileNode.Attribute("HighestLevel").Value,
+                        HealthCurrent = double.Parse(statsNode.Attribute("Health").Value),
+                        HealthMax = double.Parse(statsNode.Attribute("Health").Value),
+                        EnergyCurrent = double.Parse(statsNode.Attribute("Energy").Value),
+                        EnergyMax = double.Parse(statsNode.Attribute("Energy").Value),
+                        AttackPower = double.Parse(statsNode.Attribute("Attack").Value),
+                        BaseToHitBonus = double.Parse(statsNode.Attribute("BaseHit").Value),
+                        CritChance = double.Parse(statsNode.Attribute("CritChance").Value),
+                        CritMultiplier = double.Parse(statsNode.Attribute("CritMult").Value),
+                        DodgeChance = double.Parse(statsNode.Attribute("Dodge").Value),
+                        MovementRate = double.Parse(statsNode.Attribute("Movement").Value),
+                        Initiative = double.Parse(statsNode.Attribute("Init").Value),
+                        ActionsPerTurn = double.Parse(statsNode.Attribute("Actions").Value),
+
+                        //levelup stats
+                        OffensiveSkills = offensiveSkills.
+                        Select(x => new AttackProfile()
+                        {
+                            Name = x.Attribute("Name").Value,
+                            BaseDamage = int.Parse(x.Attribute("Damage").Value),
+                            HitChance = double.Parse(x.Attribute("Hit").Value)
+                        }).ToList()
+                    };
+                 
+                    
+
+                    monsters.Add(new Monster(profileToAdd, int.Parse(monsterProfileNode.Attribute("LowestLevel").Value)));
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
+            return monsters;
         }
 
         /*

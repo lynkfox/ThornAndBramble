@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ListOfMonsterProfiles xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <MonsterProfile Name ="Goblin" Description ="A Short little green ulgy thing." LowestLevel ="1" HighestLevel ="10">
+    <StartingStats Health="10" Energy="5" Attack ="0" BaseHit="0" CritChance=".01" CritMult="1.25" Dodge =".1" Movement="2" Actions="1" Init="10"  />
+    <LevelUpStats Health =".1" Energy=".2" Attack ="0" CritChance="0" CritMult ="0" Dodge ="0" Init=".1"/>
+    <OffensiveSkills>
+      <Attack Name ="Strike" Hit=".75" Damage="5"/>
+      <Attack Name ="Charge" Hit=".5" Damage="10"/>
+    </OffensiveSkills>
+  </MonsterProfile>
+  <MonsterProfile Name ="Orc" Description ="A Medium sized, ugly, mostly green thing" LowestLevel ="3" HighestLevel ="15">
+    <StartingStats Health="20" Energy="5" Attack ="1" BaseHit="0" CritChance=".01" CritMult="1.25" Dodge =".1" Movement="4" Actions="1" Init="10"  />
+    <LevelUpStats Health =".1" Energy=".2" Attack ="0" CritChance="0" CritMult ="0" Dodge ="0" Init=".1"/>
+    <OffensiveSkills>
+      <Attack Name ="Strike" Hit=".75" Damage="5"/>
+      <Attack Name ="BASH!" Hit=".5" Damage="10"/>
+    </OffensiveSkills>
+  </MonsterProfile>
+  <MonsterProfile Name ="Ogre" Description ="A Tall ugly pinkish thing." LowestLevel ="8" HighestLevel ="20">
+    <StartingStats Health="60" Energy="5" Attack ="2" BaseHit=".1" CritChance=".01" CritMult="1.25" Dodge =".1" Movement="2" Actions="1" Init="10"  />
+    <LevelUpStats Health =".1" Energy=".2" Attack ="0" CritChance="0" CritMult ="0" Dodge ="0" Init=".1"/>
+    <OffensiveSkills>
+      <Attack Name ="Strike" Hit=".75" Damage="5"/>
+      <Attack Name ="Rip And Tear" Hit=".5" Damage="15"/>
+    </OffensiveSkills>
+  </MonsterProfile>
+</ListOfMonsterProfiles>
+
