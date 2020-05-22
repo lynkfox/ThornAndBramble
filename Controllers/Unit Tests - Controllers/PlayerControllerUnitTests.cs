@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BattleController;
+using CharacterLib;
 
-namespace Unit Tests
+namespace ControllerUnitTests
 {
-    class PlayerControllerUnitTests
-{
-}
+    [TestClass]
+    public class PlayerControllerUnitTests
+    {
+        
+
+    }
 }

@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Reference Include="CharacterLib">
-      <HintPath>..\..\Models\Characters\CharacterLib\bin\Debug\netcoreapp2.2\CharacterLib.dll</HintPath>
+      <HintPath>..\..\Models\Characters\bin\Debug\netcoreapp2.2\CharacterLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 

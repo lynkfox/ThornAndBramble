@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleController", "BattleC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharacterController", "CharacterController\CharacterController.csproj", "{971671FF-5895-4099-BBFB-68B437234C92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit Tests", "Unit Tests - Controllers\Unit Tests.csproj", "{C2A7AA50-5229-418E-AF43-E5B006E8F4C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerUnitTests", "Unit Tests - Controllers\ControllerUnitTests.csproj", "{C2A7AA50-5229-418E-AF43-E5B006E8F4C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
