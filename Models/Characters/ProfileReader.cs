@@ -70,6 +70,7 @@ namespace CharacterLib
                 foreach (XElement monsterProfileNode in allProfiles)
                 {
                     var statsNode = monsterProfileNode.Element("StartingStats");
+                    var levelUpNode = monsterProfileNode.Element("LevelUpStats");
                     var offensiveSkills = monsterProfileNode.Element("OffensiveSkills").Elements();
                     
                     StatProfile profileToAdd = new StatProfile()
@@ -91,7 +92,17 @@ namespace CharacterLib
                         Initiative = double.Parse(statsNode.Attribute("Init").Value),
                         ActionsPerTurn = double.Parse(statsNode.Attribute("Actions").Value),
 
-                        //levelup stats
+                        HealthPercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("Health").Value),
+                        EnergyPercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("Energy").Value),
+                        AttackPowerPercentageGrowthPerLevel= double.Parse(levelUpNode.Attribute("Attack").Value),
+                        //BaseHitChanceGrowthPerLevel = double.Parse(levelUpNode.Attribute("BaseHit").Value),
+                        CritChancePercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("CritChance").Value),
+                        CritMultiplierPercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("CritMult").Value),
+                        DodgeChancePercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("Dodge").Value),
+                        InitiativePercentageGrowthPerLevel = double.Parse(levelUpNode.Attribute("Init").Value),
+                        //Actions?
+                        //Movement?
+
                         OffensiveSkills = offensiveSkills.
                         Select(x => new AttackProfile()
                         {

@@ -28,6 +28,8 @@ namespace CharacterLib.Structures
         public List<AttackProfile> OffensiveSkills { get; set; }
 
         //Level Gain Values
+        /* These are all PERCENTAGE GROWTH - so each level gains .1 of the CURRENT value (resulting in a logmarithmic growth)
+         */
 
         public double HealthPercentageGrowthPerLevel { get; set; }
         public double EnergyPercentageGrowthPerLevel { get; set; }
@@ -36,5 +38,6 @@ namespace CharacterLib.Structures
         public double CritMultiplierPercentageGrowthPerLevel { get; set; }
         public double DodgeChancePercentageGrowthPerLevel { get; set; }
         public double InitiativePercentageGrowthPerLevel { get; set; }
+        public double BaseHitChanceGrowthPerLevel { get; set; }
     }
 }
