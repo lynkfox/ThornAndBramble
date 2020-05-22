@@ -1,11 +1,16 @@
 ﻿using System;
 using CharacterLib;
 
-namespace CharacterController
+namespace ActorControllers
 {
     public class CharacterController
 
     {
         public Character Actor { get; set; } = new Character();
+
+        public double Stat(string statName)
+        {
+            return this.Actor.StatsTotalWithBonuses(statName);
+        }
     }
 }

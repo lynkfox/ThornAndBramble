@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using CharacterLib;
 
-namespace CharacterController
+namespace ActorControllers
 {
     class PlayerController : CharacterController
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BattleController;
+using ActorControllers;
 using CharacterLib;
 
 namespace ControllerUnitTests

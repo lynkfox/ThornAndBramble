@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CharacterController\ActorControllers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="CharacterLib">
       <HintPath>..\..\Models\Characters\bin\Debug\netcoreapp2.2\CharacterLib.dll</HintPath>
     </Reference>

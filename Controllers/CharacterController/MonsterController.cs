@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CharacterController
+namespace ActorControllers
 {
     class MonsterController : CharacterController
     {

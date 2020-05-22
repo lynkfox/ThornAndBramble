@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BattleController\BattleController.csproj" />
-    <ProjectReference Include="..\CharacterController\CharacterController.csproj" />
+    <ProjectReference Include="..\BattleController\BattlefieldController.csproj" />
+    <ProjectReference Include="..\CharacterController\ActorControllers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

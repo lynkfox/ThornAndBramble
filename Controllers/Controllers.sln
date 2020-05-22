@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleController", "BattleController\BattleController.csproj", "{3EAD5FF8-5E49-480E-8CC0-B94480417661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattlefieldController", "BattleController\BattlefieldController.csproj", "{3EAD5FF8-5E49-480E-8CC0-B94480417661}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharacterController", "CharacterController\CharacterController.csproj", "{971671FF-5895-4099-BBFB-68B437234C92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActorControllers", "CharacterController\ActorControllers.csproj", "{971671FF-5895-4099-BBFB-68B437234C92}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerUnitTests", "Unit Tests - Controllers\ControllerUnitTests.csproj", "{C2A7AA50-5229-418E-AF43-E5B006E8F4C9}"
 EndProject
