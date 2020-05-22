@@ -5,11 +5,17 @@ using CharacterLib;
 
 namespace ActorControllers
 {
-    class PlayerController : CharacterController
+    public class PlayerController : CharacterController
     {
         public PlayerController()
         {
             this.Actor = new Player();
+        }
+
+        public PlayerController(string name) : this()
+        {
+            this.Name = name;
+            this.Actor.CharacterStat.Name = name;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ActorControllers;
 using BattleController;
 using CharacterLib;
 
@@ -12,12 +13,12 @@ namespace ControllerUnitTests
 
         public Battlefield Setup()
         {
-            Monster genericMonster = new Monster();
-            Player player = new Player("Player");
-            player.CharacterStat.Initiative = 4;
+            MonsterController genericMonster = new MonsterController();
+            PlayerController player = new PlayerController("Player");
+            player.Actor.CharacterStat.Initiative = 4;
             Battlefield testBattle = new Battlefield();
-            testBattle.SpawnMonster(genericMonster);
-            testBattle.SpawnPlayer(player);
+            testBattle.SpawnMonster(ref genericMonster);
+            testBattle.SpawnPlayer(ref player);
 
             return testBattle;
         }
@@ -48,7 +49,7 @@ namespace ControllerUnitTests
 
             string expectedName = "DefaultCharacter";
 
-            Assert.AreEqual(expectedName, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedName, testBattle.NextToAct().Name);
         }
 
         
@@ -61,7 +62,7 @@ namespace ControllerUnitTests
 
             testBattle.AssignInitiativeOrder();
 
-            Assert.AreEqual(actualFirstTurnName, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(actualFirstTurnName, testBattle.NextToAct().Name);
         }
         
 
@@ -124,7 +125,7 @@ namespace ControllerUnitTests
             string expectedNextToAct = "Player";
             int expectedInitiative = 4;
 
-            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().Name);
             Assert.AreEqual(expectedInitiative, testBattle.CurrentInitiative);
         }
         
@@ -144,7 +145,7 @@ namespace ControllerUnitTests
             string expectedNextToAct = "DefaultCharacter";
             int expectedInitiative = 10;
 
-            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedNextToAct, testBattle.NextToAct().Name);
             Assert.AreEqual(expectedInitiative, testBattle.CurrentInitiative);
         }
 
@@ -169,10 +170,10 @@ namespace ControllerUnitTests
         {
             Battlefield testBattle = Setup();
 
-            Player testPlayer2 = new Player("Player2");
-            testPlayer2.CharacterStat.Initiative = 11;
+            PlayerController testPlayer2 = new PlayerController("Player2");
+            testPlayer2.Actor.CharacterStat.Initiative = 11;
 
-            testBattle.SpawnPlayer(testPlayer2);
+            testBattle.SpawnPlayer(ref testPlayer2);
 
             testBattle.NewRound();
 
@@ -182,7 +183,7 @@ namespace ControllerUnitTests
 
             string expectedNextToActName = "Player";
 
-            Assert.AreEqual(expectedNextToActName, testBattle.NextToAct().CharacterStat.Name);
+            Assert.AreEqual(expectedNextToActName, testBattle.NextToAct().Name);
         }
 
         [TestMethod]

@@ -13,22 +13,22 @@ namespace BattleController
         public int PlayerCount { get; set; }
         public int CurrentInitiative { get; set; }
 
-        private List<Character> deadCharacters = new List<Character>();
+        private List<CharacterController> deadCharacters = new List<CharacterController>();
 
-        public List<Character> DeadCharacters
+        public List<CharacterController> DeadCharacters
         {
             get { return deadCharacters; }
         }
 
 
-        private Stack<Character> initiativeOrder;
+        private Stack<CharacterController> initiativeOrder;
 
-        public Stack<Character> InitiativeOrder
+        public Stack<CharacterController> InitiativeOrder
         {
             get { return initiativeOrder; }
         }
 
-        private List<Character> CharactersOnField = new List<Character>();
+        private List<CharacterController> CharactersOnField = new List<CharacterController>();
         
         private Random random = new Random();
 
@@ -38,22 +38,19 @@ namespace BattleController
          * Setup the field with these methods. 
          * 
          */
-        public void SpawnMonster(Monster genericMonster)
+        public void SpawnMonster(ref MonsterController monsterCharacter)
         {
-            SpawnCharacter(genericMonster);
+            CharactersOnField.Add(monsterCharacter);
             MonsterCount++;
         }
 
-        public void SpawnPlayer(Player playerCharacter)
+        public void SpawnPlayer(ref PlayerController playerCharacter)
         {
-            SpawnCharacter(playerCharacter);
+            CharactersOnField.Add(playerCharacter);
             PlayerCount++;
         }
 
-        private void SpawnCharacter(Character genericCharacter)
-        {
-            CharactersOnField.Add(genericCharacter);
-        }
+       
 
         /* Information Methods
          * 
@@ -64,20 +61,20 @@ namespace BattleController
          */
 
 
-        private Character Participant(string characterName)
+        private CharacterController Participant(string characterName)
         {
-            return CharactersOnField.Where(x => x.CharacterStat.Name == characterName).First();
+            return CharactersOnField.Where(x => x.Name == characterName).First();
         }
 
         public int HealthOf(string characterName)
         {
-            return (int)Participant(characterName).CharacterStat.HealthCurrent;
+            return (int)Participant(characterName).Stat("HealthCurrent");
         }
 
 
         public double CharacterStat(string characterName, string statName)
         {
-            return Participant(characterName).StatsTotalWithBonuses(statName);
+            return Participant(characterName).Stat(statName);
         }
 
 
@@ -94,12 +91,12 @@ namespace BattleController
 
         public void AssignInitiativeOrder()
         {
-            var initiativeFromHighToLow = CharactersOnField.OrderBy(x => x.CharacterStat.Initiative).ToList();
+            var initiativeFromHighToLow = CharactersOnField.OrderBy(x => x.Stat("Initiative")).ToList();
 
-            initiativeOrder = new Stack<Character>(initiativeFromHighToLow);
+            initiativeOrder = new Stack<CharacterController>(initiativeFromHighToLow);
         }
 
-        public Character NextToAct()
+        public CharacterController NextToAct()
         {
 
             return initiativeOrder.Peek();
@@ -109,7 +106,7 @@ namespace BattleController
         public void NewRound()
         {
             AssignInitiativeOrder();
-            CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
+            CurrentInitiative = (int)NextToAct().Stat("Initiative");
         }
 
         public void AdvanceTurn()
@@ -124,7 +121,7 @@ namespace BattleController
 
             } else
             {
-                CurrentInitiative = (int)NextToAct().CharacterStat.Initiative;
+                CurrentInitiative = (int)NextToAct().Stat("Initiative");
             }
             
         }
@@ -193,17 +190,17 @@ namespace BattleController
 
         public void SuccessfulAttackDamage(string characterName, int damageTaken)
         {
-            Character attackedCharacter = Participant(characterName);
+            CharacterController attackedCharacter = Participant(characterName);
             attackedCharacter.TakeDamage(damageTaken);
 
 
             if(HealthOf(characterName) == 0 )
             {
-                if(attackedCharacter.GetType() == typeof(Player))
+                if(attackedCharacter.GetType() == typeof(PlayerController))
                 {
                     PlayerCount--;
                 }
-                else if (attackedCharacter.GetType() == typeof(Monster))
+                else if (attackedCharacter.GetType() == typeof(MonsterController))
                 {
                     MonsterCount--;
                 }

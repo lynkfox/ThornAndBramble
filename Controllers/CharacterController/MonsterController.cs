@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ActorControllers
 {
-    class MonsterController : CharacterController
+    public class MonsterController : CharacterController
     {
     }
 }
